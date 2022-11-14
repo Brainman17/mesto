@@ -1,0 +1,33 @@
+.popup__form-subtitle {
+  width: 100%;
+  font-family: 'Inter', Arial, sans-serif;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 17px;
+  border: none;
+  padding-bottom: 13px;
+  margin-bottom: 44px;
+  color: #000;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.5);
+}
+
+.popup__form-subtitle::placeholder {
+  color: #000;
+}
+
+.popup__form-subtitle:focus {
+  outline: none;
+}
+
+.popup__form-subtitle:focus::placeholder {
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+@media  screen and (max-width: 640px) {
+  .popup__form-subtitle {
+    margin-bottom: 30px;
+  }
+}
+
+
