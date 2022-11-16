@@ -8,6 +8,7 @@
   border-radius: 2px;
   background: url(../../../images/add-button.svg) center center/22px no-repeat;
   transition: opacity .6s;
+  border: 1px  solid #fff;
 }
 
 .profile__add-button:hover {
@@ -20,7 +21,6 @@
     margin-left: auto;
     margin-right: auto;
     background-size: 16px;
-    border: 1px  solid #fff;
     margin-top: 30px;
   }
 }
