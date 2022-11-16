@@ -6,6 +6,11 @@
   line-height: 48px;
   color: #fff;
   margin: 0;
+  max-width: 294px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+  letter-spacing: 2px;
 }
 
 @media screen and (max-width: 1220px) {
@@ -17,7 +22,12 @@
 
 @media screen and (max-width: 640px) {
   .profile__title {
+    max-width: 189px;
     font-size: 27px;
     line-height: 33px;
+    margin-left: 35px;
+    padding-top: 22px;
+    letter-spacing: 1px;
+    margin-right: -6px;
   }
 }

@@ -21,11 +21,11 @@
         <div class="profile__info">
           <div class="profile__wrapper">
             <h1 class="profile__title">Жак-Ив-Кусто</h1>
-            <button class="profile__edit-button"></button>
+            <button class="profile__edit-button" type="button"></button>
           </div>
           <h2 class="profile__subtitle">Исследователь океана</h2>
         </div>
-        <button class="profile__add-button"></button>
+        <button class="profile__add-button" type="button"></button>
       </section>
       <section class="cards page__cards" aria-label="Блок с карточками">
         <article class="card">
@@ -39,7 +39,7 @@
           <img src="./images/tomsk.jpg" alt="Томск" class="card__image" />
           <div class="card__wrapper">
             <h2 class="card__subtitle">Томск</h2>
-            <button class="card__heart-button"></button>
+            <button class="card__heart-button" type="button"></button>
           </div>
         </article>
         <article class="card">
@@ -76,25 +76,25 @@
       <p class="footer__caption">&#169; 2023 Mesto Russia</p>
     </footer>
     <section class="popup">
-      <dialog class="popup__container">
-        <form class="popup__form-content">
-          <h2 class="popup__form-title">Редактировать профиль</h2>
+      <div class="popup__container">
+        <h2 class="popup__title">Редактировать профиль</h2>
+        <form class="popup__form-content" method="post" name="popup-form" action="">
           <input
             type="text"
             name="name"
             placeholder="Жак-Ив Кусто"
-            class="popup__form-subtitle popup__name"
+            class="popup__form-subtitle popup__form-subtitle_value_name "
           />
           <input
             type="text"
             name="job"
             placeholder="Исследователь океана"
-            class="popup__form-subtitle popup__job"
+            class="popup__form-subtitle popup__form-subtitle_value_job"
           />
           <input type="submit" value="Сохранить" class="popup__save-button" />
         </form>
-        <button class="popup__close-button"></button>
-      </dialog>
+        <button class="popup__close-button" type="button"></button>
+      </div>
     </section>
 
     <script src="./scripts/index.js"></script>

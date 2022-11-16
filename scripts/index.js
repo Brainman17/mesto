@@ -16,8 +16,8 @@ popupSaveButtonElement.addEventListener('click', function() {
 })
 
 const formElement = popupElement.querySelector('.popup__form-content');
-const nameInput = formElement.querySelector('.popup__name');
-const jobInput = formElement.querySelector('.popup__job');
+const nameInput = formElement.querySelector('.popup__form-subtitle_value_name');
+const jobInput = formElement.querySelector('.popup__form-subtitle_value_job');
 const profileName = document.querySelector('.profile__title');
 const profileJob = document.querySelector('.profile__subtitle');
 
