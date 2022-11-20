@@ -1,5 +1,5 @@
 @font-face {
-  font-family: 'Inter', Arial, sans-serif;
+  font-family: 'Inter';
   src: url('../fonts/Inter-Black.eot');
   src: local('Inter Black'), local('Inter-Black'),
       url('../fonts/Inter-Black.eot') format('embedded-opentype'),
@@ -11,7 +11,7 @@
 }
 
 @font-face {
-  font-family: 'Inter', Arial, sans-serif;
+  font-family: 'Inter';
   src: url('../fonts/Inter-Medium.eot');
   src: local('Inter Medium'), local('Inter-Medium'),
       url('../fonts/Inter-Medium.eot') format('embedded-opentype'),
@@ -23,7 +23,7 @@
 }
 
 @font-face {
-  font-family: 'Inter', Arial, sans-serif;
+  font-family: 'Inter';
   src: url('../fonts/Inter-Regular.eot');
   src: local('Inter Regular'), local('Inter-Regular'),
       url('../fonts/Inter-Regular.eot') format('embedded-opentype'),

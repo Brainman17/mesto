@@ -6,8 +6,6 @@
   padding-bottom: 50px;
   margin: 0;
   max-width: 100%;
-  word-spacing: 0.9px;
-  letter-spacing: -0.9px;
 }
 
 @media  screen and (max-width: 640px) {
@@ -15,8 +13,6 @@
     font-size: 18px;
     line-height: 22px;
     padding-bottom: 73px;
-    word-spacing: -4px;
-    letter-spacing: -0.5px;
   }
 }
 
