@@ -10,7 +10,6 @@
   word-spacing: 3px;
   color: #000;
   border-bottom: 1px solid rgba(0, 0, 0, 0.2);
-  letter-spacing: 0.2px;
 }
 
 .popup__form-subtitle:nth-child(2) {
