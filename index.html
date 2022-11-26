@@ -30,6 +30,7 @@
       <section class="cards page__cards" aria-label="Блок с карточками">
         <article class="card">
           <img src="./images/dombay.jpg" alt="Домбай" class="card__image" />
+          <button class="card__delete-button" type="button"></button>
           <div class="card__wrapper">
             <h2 class="card__subtitle">Домбай</h2>
             <button class="card__heart-button" type="button"></button>
@@ -37,6 +38,7 @@
         </article>
         <article class="card">
           <img src="./images/tomsk.jpg" alt="Томск" class="card__image" />
+          <button class="card__delete-button" type="button"></button>
           <div class="card__wrapper">
             <h2 class="card__subtitle">Томск</h2>
             <button class="card__heart-button" type="button"></button>
@@ -44,6 +46,7 @@
         </article>
         <article class="card">
           <img src="./images/elbrus.jpg" alt="Эльбрус" class="card__image" />
+          <button class="card__delete-button" type="button"></button>
           <div class="card__wrapper">
             <h2 class="card__subtitle">Эльбрус</h2>
             <button class="card__heart-button" type="button"></button>
@@ -51,6 +54,7 @@
         </article>
         <article class="card">
           <img src="./images/olkhon.jpg" alt="Ольхон" class="card__image" />
+          <button class="card__delete-button" type="button"></button>
           <div class="card__wrapper">
             <h2 class="card__subtitle">Ольхон</h2>
             <button class="card__heart-button" type="button"></button>
@@ -58,6 +62,7 @@
         </article>
         <article class="card">
           <img src="./images/karachayevsk.jpg" alt="Карачаевск" class="card__image" />
+          <button class="card__delete-button" type="button"></button>
           <div class="card__wrapper">
             <h2 class="card__subtitle">Карачаевск</h2>
             <button class="card__heart-button" type="button"></button>
@@ -65,6 +70,7 @@
         </article>
         <article class="card">
           <img src="./images/baikal.jpg" alt="Байкал" class="card__image" />
+          <button class="card__delete-button" type="button"></button>
           <div class="card__wrapper">
             <h2 class="card__subtitle">Байкал</h2>
             <button class="card__heart-button" type="button"></button>
@@ -97,6 +103,29 @@
       </div>
     </section>
 
+    <section class="popup-add">
+      <div class="popup__container">
+        <h2 class="popup__title">Новое место</h2>
+        <form class="popup__form-content" method="post" name="popup-form" action="#">
+          <input
+            type="text"
+            name="name"
+            placeholder="Название"
+            class="popup__form-subtitle popup__form-subtitle_value_name"
+          />
+          <input
+            type="text"
+            name="link"
+            placeholder="Ссылка на картинку"
+            class="popup__form-subtitle popup__form-subtitle_value_job"
+          />
+          <input type="submit" value="Создать" class="popup__create-button" />
+        </form>
+        <button class="popup__close-button" type="button"></button>
+      </div>
+    </section>
+
     <script src="./scripts/index.js"></script>
+    <script src="./scripts/array.js"></script>
   </body>
 </html>

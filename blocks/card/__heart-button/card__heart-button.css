@@ -10,13 +10,11 @@
 }
 
 .card__heart-button:hover {
-  opacity: .3;
+  opacity: .5;
   cursor: pointer;
 }
 
-.card__heart-button:active {
-  background: black;
-}
+
 
 
 
