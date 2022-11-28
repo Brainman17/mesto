@@ -1,4 +1,4 @@
-const initialCards = [
+export const initialCards = [
   {
     name: 'Архыз',
     link: 'http://127.0.0.1:5500/images/dombay.jpg'
@@ -25,21 +25,6 @@ const initialCards = [
   }
 ];
 
-function createElement(item) {
-  const template = `
-    <article class="card">
-    <img src:${item.link} alt="Домбай" class="card__image" />
-    <button class="card__delete-button" type="button"></button>
-    <div class="card__wrapper">
-      <h2 class="card__subtitle">${item.name}</h2>
-      <button class="card__heart-button" type="button"></button>
-    </div>
-    </article>
-  `
 
-  // console.log(template)
-}
 
-initialCards.forEach(function(item) {
-  createElement(item);
-})
+
