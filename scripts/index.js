@@ -45,9 +45,6 @@ formElement.addEventListener('submit', formSubmitHandler);
 
 
 
-
-// Практическая работа 5
-
 const cardsList = document.querySelector('.cards');
 const cardTemplate = document.querySelector('#card-template').content.querySelector('.card');
 const form = document.querySelector('.popup__form-content_add');
@@ -64,13 +61,9 @@ function createElement(item) {
   const DeleteButton = card.querySelector('.card__delete-button');
   const LikeButton = card.querySelector('.card__heart-button');
   const img = card.querySelector('.card__image');
-  const popupCardSubtitle = document.querySelector('.popup__card-subtitle');
-  const popupCardImage = document.querySelector('.popup__card-img');
 
   img.src = item.link;
   cardTitle.textContent = item.name;
-  popupCardImage.src = img.src;
-  popupCardSubtitle.textContent = cardTitle.textContent;
 
   DeleteButton.addEventListener('click', DeleteButtonClick);
   LikeButton.addEventListener('click', LikeButtonClick);
@@ -99,6 +92,15 @@ const renderCard = (item) => {
 form.addEventListener('submit', formCreateHandler);
 
 
+
+const openCardClick = (e) => {
+  const popupCardSubtitle = document.querySelector('.popup__card-subtitle');
+  const popupCardImage = document.querySelector('.popup__card-img');
+  popupCardImage.src = e.target.currentSrc;
+  popupCardSubtitle.textContent = e.target.parentNode.innerText;
+  popupCard.classList.add('popup_opened');
+}
+
 const DeleteButtonClick = (e) => {
   e.target.closest('.card').remove();
 }
@@ -107,9 +109,7 @@ const LikeButtonClick = (e) => {
   e.target.classList.toggle('card__heart-button_active');
 }
 
-const openCardClick = (e) => {
-  e.target.classList.add('popup_card');
- }
+
 
 // Рендер карточек
 

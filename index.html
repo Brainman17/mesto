@@ -27,9 +27,10 @@
         </div>
         <button class="profile__add-button" type="button"></button>
       </section>
-      <section class="cards page__cards" aria-label="Блок с карточками">
-
-      </section>
+      <section
+        class="cards page__cards"
+        aria-label="Блок с карточками"
+      ></section>
     </main>
     <footer class="footer page__footer">
       <p class="footer__caption">&#169; 2023 Mesto Russia</p>
@@ -38,12 +39,17 @@
     <section class="popup popup_edit">
       <div class="popup__container">
         <h2 class="popup__title">Редактировать профиль</h2>
-        <form class="popup__form-content" method="post" name="popup-form" action="#">
+        <form
+          class="popup__form-content"
+          method="post"
+          name="popup-form"
+          action="#"
+        >
           <input
             type="text"
             name="name"
             placeholder="Жак-Ив Кусто"
-            class="popup__form-subtitle popup__form-subtitle_value_name "
+            class="popup__form-subtitle popup__form-subtitle_value_name"
           />
           <input
             type="text"
@@ -60,7 +66,12 @@
     <section class="popup popup_add">
       <div class="popup__container">
         <h2 class="popup__title">Новое место</h2>
-        <form class="popup__form-content popup__form-content_add" method="post" name="popup-form" action="#">
+        <form
+          class="popup__form-content popup__form-content_add"
+          method="post"
+          name="popup-form"
+          action="#"
+        >
           <input
             type="text"
             name="name-add"
@@ -80,12 +91,15 @@
     </section>
 
     <section class="popup popup_card">
-      <div class="popup__container">
-      <button class="popup__close-button" type="button"></button>
-      <figure>
-        <img class="popup__card-img" src=" " alt="Фотография">
-        <figcaption class="popup__card-subtitle"></figcaption>
-      </figure>
+      <div class="popup__card-wrap">
+        <figure class="popup__card-figure">
+          <button
+            class="popup__close-button popup__close-button_card"
+            type="button"
+          ></button>
+          <img class="popup__card-img" src=" " alt="Фотография" />
+          <figcaption class="popup__card-subtitle"></figcaption>
+        </figure>
       </div>
     </section>
 
