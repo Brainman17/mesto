@@ -1,20 +1,6 @@
 .popup__card-img {
-object-fit: cover;
-position: relative;
-max-width: 1000px;
-max-height: 500px;
-}
-
-@media  screen and (max-width: 920px) {
-  .popup__card-img {
-    max-width: 600px;
-    max-height: 400px;
-}
-}
-
-@media  screen and (max-width: 640px) {
-  .popup__card-img {
-    width: 240px;
-    height: 300px;
-}
+  object-fit: cover;
+  position: relative;
+  max-height: 75vh;
+  max-width: 75vw;
 }

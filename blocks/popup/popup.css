@@ -9,8 +9,4 @@
   transition: .4s ease-in-out;
 }
 
-@media  screen and (max-width: 640px) {
-  .popup {
-    top: 0;
-}
-}
+

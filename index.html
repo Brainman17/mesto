@@ -40,7 +40,7 @@
       <div class="popup__container">
         <h2 class="popup__title">Редактировать профиль</h2>
         <form
-          class="popup__form-content"
+          class="popup__form-content popup__form-content_edit"
           method="post"
           name="popup-form"
           action="#"
@@ -48,13 +48,13 @@
           <input
             type="text"
             name="name"
-            placeholder="Жак-Ив Кусто"
+            placeholder="Имя"
             class="popup__form-subtitle popup__form-subtitle_value_name"
           />
           <input
             type="text"
             name="job"
-            placeholder="Исследователь океана"
+            placeholder="Кто я?"
             class="popup__form-subtitle popup__form-subtitle_value_job"
           />
           <input type="submit" value="Сохранить" class="popup__save-button" />
@@ -97,7 +97,7 @@
             class="popup__close-button popup__close-button_card"
             type="button"
           ></button>
-          <img class="popup__card-img" src=" " alt="Фотография" />
+          <img class="popup__card-img" src=" " alt=" " />
           <figcaption class="popup__card-subtitle"></figcaption>
         </figure>
       </div>
@@ -105,7 +105,7 @@
 
     <template id="card-template">
       <article class="card">
-        <img src=" " alt="Фотография" class="card__image" />
+        <img src=" " alt=" " class="card__image" />
         <button class="card__delete-button" type="button"></button>
         <div class="card__wrapper">
           <h2 class="card__subtitle"></h2>
