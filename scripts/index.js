@@ -1,8 +1,7 @@
 import {initialCards} from './array.js';
-
 // Переменные
 
-
+const popupMain = document.querySelector('.popup');
 const popupAdd = document.querySelector('.popup_add');
 const popupEdit = document.querySelector('.popup_edit');
 const popupCard= document.querySelector('.popup_card');
@@ -24,6 +23,7 @@ const formInputLink = document.querySelector('[name="link-add"]');
 const popupCardSubtitle = document.querySelector('.popup__card-subtitle');
 const popupCardImage = document.querySelector('.popup__card-img');
 
+// Функции
 
 const renderCard = (item) => {
   cardsContainer.prepend(createElement(item));
@@ -44,9 +44,6 @@ const likeButtonClick = (e) => {
   e.target.classList.toggle('card__heart-button_active');
 }
 
-// Функции
-
-
 function openPopup(popup) {
   popup.classList.add('popup_opened');
 }
@@ -59,7 +56,6 @@ function exchangeOfValues() {
   nameInput.value = profileName.textContent;
   jobInput.value = profileJob.textContent;
 }
-
 
 function handleSubmitButton (evt) {
   evt.preventDefault();
@@ -98,7 +94,6 @@ function createElement(item) {
 
 // Обработчики событий
 
-
 popupAddButtonElement.addEventListener('click',function openAddPopup() {
   openPopup(popupAdd);
   exchangeOfValues ();
@@ -113,9 +108,27 @@ popupCloseButtonElementEdit.addEventListener('click', () => closePopup(popupEdit
 popupCloseButtonElementCard.addEventListener('click', () => closePopup(popupCard));
 formElementEdit.addEventListener('submit', handleSubmitButton);
 formElementAdd.addEventListener('submit', handleCreateButton);
+popupEdit.addEventListener('click', function (evt) {
+  if(evt.target === evt.currentTarget) closePopup(popupEdit)
+});
+document.addEventListener('keydown', function(evt) {
+  if (evt.key === "Escape") closePopup(popupEdit);
+});
+popupAdd.addEventListener('click', function (evt) {
+  if(evt.target === evt.currentTarget) closePopup(popupAdd)
+});
+document.addEventListener('keydown', function(evt) {
+  if (evt.key === "Escape") closePopup(popupAdd);
+});
+popupCard.addEventListener('click', function (evt) {
+  if(evt.target === evt.currentTarget) closePopup(popupCard)
+});
+document.addEventListener('keydown', function(evt) {
+  if (evt.key === "Escape") closePopup(popupCard);
+});
+
 
 // Рендер карточек
-
 
 initialCards.forEach((item) => {
   const element = createElement(item);
