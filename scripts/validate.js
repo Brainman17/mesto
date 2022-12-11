@@ -1,3 +1,5 @@
+// console.log(input.validity.valid)
+
 
 const checkInputValidity = (input, object) => {
   const error = document.querySelector(`#${input.id}-error`);
@@ -26,15 +28,16 @@ const toggleButtonVisibility = (inputs, button, object) => {
 }
 
 const enableValidation = (object) => {
-  const { formSelector, inputSelector, submitButtonSelector, ...restObject } = object
+  const { formSelector, inputSelector, submitButtonSelector, ...restObject } = object;
   const forms = [...document.querySelectorAll(formSelector)];
 
   forms.forEach(form => {
-  const inputs = [...form.querySelectorAll(inputSelector)];
-  const button = form.querySelector(submitButtonSelector);
+    const inputs = [...form.querySelectorAll(inputSelector)];
+    const button = form.querySelector(submitButtonSelector);
 
-  form.addEventListener('submit', (e) => {
-    e.preventDefault();
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+    })
 
     inputs.forEach(input => {
       input.addEventListener('input', () => {
@@ -44,8 +47,8 @@ const enableValidation = (object) => {
       })
     })
   })
-})
 }
+
 
 enableValidation({
   formSelector: '.popup__form',
@@ -55,3 +58,7 @@ enableValidation({
   inputErrorClass: 'popup__input_type_error',
   errorClass: 'popup__error_visible'
 });
+
+
+const input = document.querySelector('.popup__input');
+const error = document.querySelector('#name-input-error');
