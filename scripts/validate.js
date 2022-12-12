@@ -1,6 +1,3 @@
-// console.log(input.validity.valid)
-
-
 const checkInputValidity = (input, object) => {
   const error = document.querySelector(`#${input.id}-error`);
 
@@ -18,14 +15,14 @@ const checkInputValidity = (input, object) => {
 }
 
 const toggleButtonVisibility = (inputs, button, object) => {
-  const isFormValid = inputs.every(input => input.validationMessage);
+  const isFormValid = inputs.every(input => input.validity.valid);
 
   if(isFormValid) {
     button.classList.remove(object.inactiveButtonClass);
-    // button.disabled = '';
+    button.disabled = '';
   } else {
     button.classList.add(object.inactiveButtonClass);
-    // button.disabled = 'disabled';
+    button.disabled = 'disabled';
   }
 }
 
