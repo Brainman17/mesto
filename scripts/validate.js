@@ -6,11 +6,13 @@ const checkInputValidity = (input, object) => {
 
   if(input.validity.valid) {
     error.textContent = '';
-    error.classList.remove(object.errorClass);
+    input.classList.remove(object.errorClass);
+    input.classList.remove('popup__input_margin_out');
     error.classList.remove(object.inputErrorClass);
   } else {
     error.textContent = input.validationMessage;
-    error.classList.add(object.errorClass);
+    input.classList.add(object.errorClass);
+    input.classList.add('popup__input_margin_out');
     error.classList.add(object.inputErrorClass);
   }
 }
@@ -20,10 +22,10 @@ const toggleButtonVisibility = (inputs, button, object) => {
 
   if(isFormValid) {
     button.classList.remove(object.inactiveButtonClass);
-    button.disabled = '';
+    // button.disabled = '';
   } else {
     button.classList.add(object.inactiveButtonClass);
-    button.disabled = 'disabled';
+    // button.disabled = 'disabled';
   }
 }
 
@@ -59,6 +61,3 @@ enableValidation({
   errorClass: 'popup__error_visible'
 });
 
-
-const input = document.querySelector('.popup__input');
-const error = document.querySelector('#name-input-error');

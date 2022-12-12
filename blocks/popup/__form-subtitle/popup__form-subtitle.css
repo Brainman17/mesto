@@ -12,10 +12,6 @@
   border-bottom: 1px solid rgba(0, 0, 0, 0.2);
 }
 
-.popup__form-subtitle:nth-child(2) {
-  margin-bottom: 49px;
-}
-
 .popup__form-subtitle::placeholder {
   color: #c4c4c4;
 }
