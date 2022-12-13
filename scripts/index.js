@@ -1,4 +1,5 @@
 import {initialCards} from './array.js';
+
 // Переменные
 
 const popupMain = document.querySelector('.popup');
@@ -10,14 +11,14 @@ const popupCloseButtonElementAdd = document.querySelector('.popup__close-button_
 const popupCloseButtonElementEdit = document.querySelector('.popup__close-button_edit');
 const popupCloseButtonElementCard = document.querySelector('.popup__close-button_card');
 const popupEditButtonElement = document.querySelector('.profile__edit-button');
-const formElementEdit = document.querySelector('.popup__form-content_edit');
+const formElementEdit = document.forms['form-edit'];
+const formElementAdd = document.forms['form-add'];
 const nameInput = formElementEdit.querySelector('.popup__form-subtitle_value_name');
 const jobInput = formElementEdit.querySelector('.popup__form-subtitle_value_job');
 const profileName = document.querySelector('.profile__title');
 const profileJob = document.querySelector('.profile__subtitle');
 const cardsContainer = document.querySelector('.cards');
 const cardTemplate = document.querySelector('#card-template').content.querySelector('.card');
-const formElementAdd = document.querySelector('.popup__form-content_add');
 const formInputName = document.querySelector('[name="name-add"]');
 const formInputLink = document.querySelector('[name="link-add"]');
 const popupCardSubtitle = document.querySelector('.popup__card-subtitle');
@@ -29,18 +30,18 @@ const renderCard = (item) => {
   cardsContainer.prepend(createElement(item));
 };
 
-const openCardClick = (e) => {
+const handleOpenCardClick = (e) => {
   popupCardImage.src = e.target.currentSrc;
   popupCardImage.alt = e.target.parentNode.innerText;
   popupCardSubtitle.textContent = e.target.parentNode.innerText;
   openPopup(popupCard);
 }
 
-const deleteButtonClick = (e) => {
+const handleDeleteButtonClick = (e) => {
   e.target.closest('.card').remove();
 }
 
-const likeButtonClick = (e) => {
+const handleLikeButtonClick = (e) => {
   e.target.classList.toggle('card__heart-button_active');
 }
 
@@ -52,19 +53,19 @@ function closePopup(popup) {
   popup.classList.remove('popup_opened');
 }
 
-function exchangeOfValues() {
+function fillProfileInputs() {
   nameInput.value = profileName.textContent;
   jobInput.value = profileJob.textContent;
 }
 
-function handleSubmitButton (evt) {
+function handleProfileFormSubmit (evt) {
   evt.preventDefault();
   closePopup(popupEdit);
   profileName.textContent = nameInput.value;
   profileJob.textContent = jobInput.value;
 }
 
-function handleCreateButton(evt) {
+function handleCardFormSubmit(evt) {
   evt.preventDefault();
   closePopup(popupAdd);
   renderCard({ name: formInputName.value,
@@ -84,9 +85,9 @@ function createElement(item) {
   img.alt = item.name;
   cardTitle.textContent = item.name;
 
-  deleteButton.addEventListener('click', deleteButtonClick);
-  likeButton.addEventListener('click', likeButtonClick);
-  img.addEventListener('click', openCardClick);
+  deleteButton.addEventListener('click', handleDeleteButtonClick);
+  likeButton.addEventListener('click', handleLikeButtonClick);
+  img.addEventListener('click', () => handleCardClick(item));
 
   return card;
 
@@ -96,18 +97,17 @@ function createElement(item) {
 
 popupAddButtonElement.addEventListener('click',function openAddPopup() {
   openPopup(popupAdd);
-  exchangeOfValues ();
 });
 popupEditButtonElement.addEventListener('click', function openEditPopup() {
   openPopup(popupEdit);
-  exchangeOfValues ();
+  fillProfileInputs ();
 });
 
 popupCloseButtonElementAdd.addEventListener('click', () => closePopup(popupAdd));
 popupCloseButtonElementEdit.addEventListener('click', () => closePopup(popupEdit));
 popupCloseButtonElementCard.addEventListener('click', () => closePopup(popupCard));
-formElementEdit.addEventListener('submit', handleSubmitButton);
-formElementAdd.addEventListener('submit', handleCreateButton);
+formElementEdit.addEventListener('submit', handleProfileFormSubmit);
+formElementAdd.addEventListener('submit', handleCardFormSubmit);
 popupEdit.addEventListener('click', function (evt) {
   if(evt.target === evt.currentTarget) closePopup(popupEdit)
 });

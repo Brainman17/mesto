@@ -3,13 +3,11 @@ const checkInputValidity = (input, object) => {
 
   if(input.validity.valid) {
     error.textContent = '';
-    input.classList.remove(object.errorClass);
-    input.classList.remove('popup__input_margin_out');
+    input.classList.remove(object.errorClass, object.inputMarginOut);
     error.classList.remove(object.inputErrorClass);
   } else {
     error.textContent = input.validationMessage;
-    input.classList.add(object.errorClass);
-    input.classList.add('popup__input_margin_out');
+    input.classList.add(object.errorClass, object.inputMarginOut);
     error.classList.add(object.inputErrorClass);
   }
 }
@@ -43,10 +41,16 @@ const enableValidation = (object) => {
 
         checkInputValidity(input, restObject);
         toggleButtonVisibility(inputs, button, restObject);
+        form.addEventListener('reset', () => {
+          setTimeout(() => {
+            toggleButtonVisibility(inputs, button, restObject);
+          }, 0)
+          })
+        })
       })
     })
-  })
-}
+  }
+
 
 
 enableValidation({
@@ -54,6 +58,7 @@ enableValidation({
   inputSelector: '.popup__input',
   submitButtonSelector: '.popup__button',
   inactiveButtonClass: 'popup__button_invalid',
+  inputMarginOut: 'popup__input_margin_out',
   inputErrorClass: 'popup__input_type_error',
   errorClass: 'popup__error_visible'
 });
