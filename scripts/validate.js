@@ -52,7 +52,6 @@ const enableValidation = (object) => {
   }
 
 
-
 enableValidation({
   formSelector: '.popup__form',
   inputSelector: '.popup__input',
