@@ -35,17 +35,16 @@ const enableValidation = (object) => {
     form.addEventListener('submit', (e) => {
       e.preventDefault();
     })
-
+    form.addEventListener('reset', () => {
+      setTimeout(() => {
+        toggleButtonVisibility(inputs, button, restObject);
+      }, 0)
+      })
     inputs.forEach(input => {
       input.addEventListener('input', () => {
 
         checkInputValidity(input, restObject);
         toggleButtonVisibility(inputs, button, restObject);
-        form.addEventListener('reset', () => {
-          setTimeout(() => {
-            toggleButtonVisibility(inputs, button, restObject);
-          }, 0)
-          })
         })
       })
     })

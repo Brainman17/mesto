@@ -28,9 +28,9 @@ const renderCard = (item) => {
 };
 
 const handleCardClick = (e) => {
-  popupCardImage.src = e.target.currentSrc;
-  popupCardImage.alt = e.target.parentNode.innerText;
-  popupCardSubtitle.textContent = e.target.parentNode.innerText;
+  popupCardImage.src = e.target.src;
+  popupCardImage.alt = e.target.alt;
+  popupCardSubtitle.textContent = e.target.alt;
   openPopup(popupCard);
 }
 
@@ -129,9 +129,6 @@ initialCards.forEach((item) => {
   const element = createElement(item);
   cardsContainer.append(element);
 })
-
-
-
 
 
 
