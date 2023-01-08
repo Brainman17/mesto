@@ -5,6 +5,10 @@ export class FormValidator {
     this._formSelector = selector.formSelector;
     this._inputSelector = selector.inputSelector;
     this._submitButtonSelector = selector.submitButtonSelector;
+    this._inactiveButtonClass = selector.inactiveButtonClass;
+    this._inputMarginOut =  selector.inputMarginOut;
+    this._inputErrorClass = selector.inputErrorClass;
+    this._errorClass = selector.errorClass;
     this._error = selector.error;
     this._isFormValid = selector.isFormValid;
     this._forms = selector.forms;
