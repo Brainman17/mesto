@@ -15,23 +15,23 @@ export class FormValidator {
   }
 
   _checkInputValidity = (input, object) => {
-    this._error = document.querySelector(`#${input.id}-error`);
+    const error = document.querySelector(`#${input.id}-error`);
 
     if(input.validity.valid) {
-      this._error.textContent = '';
+      error.textContent = '';
       input.classList.remove(object.errorClass, object.inputMarginOut);
-      this._error.classList.remove(object.inputErrorClass);
+      error.classList.remove(object.inputErrorClass);
     } else {
-      this._error.textContent = input.validationMessage;
+      error.textContent = input.validationMessage;
       input.classList.add(object.errorClass, object.inputMarginOut);
-      this._error.classList.add(object.inputErrorClass);
+      error.classList.add(object.inputErrorClass);
     }
   }
 
   _toggleButtonVisibility = (inputs, button, object) => {
-    this._isFormValid = inputs.every(input => input.validity.valid);
+    const isFormValid = inputs.every(input => input.validity.valid);
 
-    if(this._isFormValid) {
+    if(isFormValid) {
       button.classList.remove(object.inactiveButtonClass);
       button.disabled = '';
     } else {
@@ -41,12 +41,12 @@ export class FormValidator {
   }
 
   _enableValidation = (object) => {
-    { this._formSelector, this._inputSelector, this._submitButtonSelector, ...restObject } = object;
-    const forms = [...document.querySelectorAll(this._formSelector)];
+    const{ formSelector, inputSelector, submitButtonSelector, ...restObject } = object;
+    const forms = [...document.querySelectorAll(formSelector)];
 
     forms.forEach(form => {
-      const inputs = [...form.querySelectorAll(this._inputSelector)];
-      const button = form.querySelector(this._submitButtonSelector);
+      const inputs = [...form.querySelectorAll(inputSelector)];
+      const button = form.querySelector(submitButtonSelector);
 
       form.addEventListener('submit', (e) => {
         e.preventDefault();
@@ -65,18 +65,16 @@ export class FormValidator {
         })
       })
     }
-
-    enableValidation({
-      formSelector: '.popup__form',
-      inputSelector: '.popup__input',
-      submitButtonSelector: '.popup__button',
-      inactiveButtonClass: 'popup__button_invalid',
-      inputMarginOut: 'popup__input_margin_out',
-      inputErrorClass: 'popup__input_type_error',
-      errorClass: 'popup__error_visible'
-    });
 }
 
 
-
+enableValidation({
+  formSelector: '.popup__form',
+  inputSelector: '.popup__input',
+  submitButtonSelector: '.popup__button',
+  inactiveButtonClass: 'popup__button_invalid',
+  inputMarginOut: 'popup__input_margin_out',
+  inputErrorClass: 'popup__input_type_error',
+  errorClass: 'popup__error_visible'
+});
 
