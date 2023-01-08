@@ -1,4 +1,7 @@
-import {initialCards} from './array.js';
+// import { FormValidator } from './FormValidator.js';
+import { initialCards } from './Card.js';
+import { Card } from './Card.js';
+import { FormValidator } from 'FormValidator.js';
 
 // Переменные
 
@@ -85,15 +88,15 @@ function createElement(item) {
   const cardTitle = card.querySelector('.card__subtitle');
   const deleteButton = card.querySelector('.card__delete-button');
   const likeButton = card.querySelector('.card__heart-button');
-  const img = card.querySelector('.card__image');
+  const cardImg = card.querySelector('.card__image');
 
-  img.src = item.link;
-  img.alt = item.name;
+  cardImg.src = item.link;
+  cardImg.alt = item.name;
   cardTitle.textContent = item.name;
 
   deleteButton.addEventListener('click', handleDeleteButtonClick);
   likeButton.addEventListener('click', handleLikeButtonClick);
-  img.addEventListener('click', handleCardClick);
+  cardImg.addEventListener('click', handleCardClick);
 
   return card;
 
@@ -131,6 +134,71 @@ initialCards.forEach((item) => {
 })
 
 
+// Валидация
+
+
+const checkInputValidity = (input, object) => {
+  const error = document.querySelector(`#${input.id}-error`);
+
+  if(input.validity.valid) {
+    error.textContent = '';
+    input.classList.remove(object.errorClass, object.inputMarginOut);
+    error.classList.remove(object.inputErrorClass);
+  } else {
+    error.textContent = input.validationMessage;
+    input.classList.add(object.errorClass, object.inputMarginOut);
+    error.classList.add(object.inputErrorClass);
+  }
+}
+
+const toggleButtonVisibility = (inputs, button, object) => {
+  const isFormValid = inputs.every(input => input.validity.valid);
+
+  if(isFormValid) {
+    button.classList.remove(object.inactiveButtonClass);
+    button.disabled = '';
+  } else {
+    button.classList.add(object.inactiveButtonClass);
+    button.disabled = 'disabled';
+  }
+}
+
+const enableValidation = (object) => {
+  const { formSelector, inputSelector, submitButtonSelector, ...restObject } = object;
+  const forms = [...document.querySelectorAll(formSelector)];
+
+  forms.forEach(form => {
+    const inputs = [...form.querySelectorAll(inputSelector)];
+    const button = form.querySelector(submitButtonSelector);
+
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+    })
+    form.addEventListener('reset', () => {
+      setTimeout(() => {
+        toggleButtonVisibility(inputs, button, restObject);
+      }, 0)
+      })
+    inputs.forEach(input => {
+      input.addEventListener('input', () => {
+
+        checkInputValidity(input, restObject);
+        toggleButtonVisibility(inputs, button, restObject);
+        })
+      })
+    })
+  }
+
+
+enableValidation({
+  formSelector: '.popup__form',
+  inputSelector: '.popup__input',
+  submitButtonSelector: '.popup__button',
+  inactiveButtonClass: 'popup__button_invalid',
+  inputMarginOut: 'popup__input_margin_out',
+  inputErrorClass: 'popup__input_type_error',
+  errorClass: 'popup__error_visible'
+});
 
 
 
