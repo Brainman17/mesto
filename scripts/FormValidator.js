@@ -14,33 +14,33 @@ export class FormValidator {
     this._forms = selector.forms;
   }
 
-  _checkInputValidity = (input, object) => {
+  _checkInputValidity = (input) => {
     const error = document.querySelector(`#${input.id}-error`);
 
     if(input.validity.valid) {
       error.textContent = '';
-      input.classList.remove(object.errorClass, object.inputMarginOut);
-      error.classList.remove(object.inputErrorClass);
+      input.classList.remove(this._errorClass, this._inputMarginOut);
+      error.classList.remove(this._inputErrorClass);
     } else {
       error.textContent = input.validationMessage;
-      input.classList.add(object.errorClass, object.inputMarginOut);
-      error.classList.add(object.inputErrorClass);
+      input.classList.add(this._errorClass, this._inputMarginOut);
+      error.classList.add(this._inputErrorClass);
     }
   }
 
-  _toggleButtonVisibility = (inputs, button, object) => {
+  _toggleButtonVisibility = (inputs, button) => {
     const isFormValid = inputs.every(input => input.validity.valid);
 
     if(isFormValid) {
-      button.classList.remove(object.inactiveButtonClass);
+      button.classList.remove(this._submitButtonSelector);
       button.disabled = '';
     } else {
-      button.classList.add(object.inactiveButtonClass);
+      button.classList.add(this._inactiveButtonClass);
       button.disabled = 'disabled';
     }
   }
 
-  _enableValidation = (object) => {
+  enableValidation = (object) => {
     const{ formSelector, inputSelector, submitButtonSelector, ...restObject } = object;
     const forms = [...document.querySelectorAll(formSelector)];
 
@@ -68,13 +68,4 @@ export class FormValidator {
 }
 
 
-enableValidation({
-  formSelector: '.popup__form',
-  inputSelector: '.popup__input',
-  submitButtonSelector: '.popup__button',
-  inactiveButtonClass: 'popup__button_invalid',
-  inputMarginOut: 'popup__input_margin_out',
-  inputErrorClass: 'popup__input_type_error',
-  errorClass: 'popup__error_visible'
-});
 

@@ -1,5 +1,5 @@
 import { Card } from './Card.js';
-// import { FormValidator } from 'FormValidator.js';
+import { FormValidator } from './FormValidator.js';
 
 const initialCards = [
   {
@@ -137,16 +137,16 @@ popupEditButtonElement.addEventListener('click', function openEditPopup() {
   fillProfileInputs ();
 });
 
-popups.forEach((popup) => {
-  popup.addEventListener('mousedown', (evt) => {
-      if (evt.target.classList.contains('popup_opened')) {
-          closePopup(popup)
-      }
-      if (evt.target.classList.contains('popup__close-button')) {
-        closePopup(popup)
-      }
-  })
-})
+// popups.forEach((popup) => {
+//   popup.addEventListener('mousedown', (evt) => {
+//       if (evt.target.classList.contains('popup_opened')) {
+//           closePopup(popup)
+//       }
+//       if (evt.target.classList.contains('popup__close-button')) {
+//         closePopup(popup)
+//       }
+//   })
+// })
 
 formElementEdit.addEventListener('submit', handleProfileFormSubmit);
 formElementAdd.addEventListener('submit', handleCardFormSubmit);
