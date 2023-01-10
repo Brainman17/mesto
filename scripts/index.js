@@ -3,8 +3,6 @@ import {Card} from './Card.js';
 import {config} from './config.js';
 import {initialCards} from './initialCards.js';
 
-
-
 // Переменные
 
 const popups = document.querySelectorAll('.popup');
@@ -13,38 +11,37 @@ const popupEdit = document.querySelector('.popup_edit');
 const popupCard= document.querySelector('.popup_card');
 const popupAddButtonElement = document.querySelector('.profile__add-button');
 const popupEditButtonElement = document.querySelector('.profile__edit-button');
+const popupCardSubtitle = document.querySelector('.popup__card-subtitle');
+const popupCardImage = document.querySelector('.popup__card-img');
+
 const formElementEdit = document.forms['form-edit'];
 const formElementAdd = document.forms['form-add'];
+const formInputName = document.querySelector('[name="name-add"]');
+const formInputLink = document.querySelector('[name="link-add"]');
+
 const nameInput = formElementEdit.querySelector('.popup__form-subtitle_value_name');
 const jobInput = formElementEdit.querySelector('.popup__form-subtitle_value_job');
 const profileName = document.querySelector('.profile__title');
 const profileJob = document.querySelector('.profile__subtitle');
 const cardsContainer = document.querySelector('.cards');
 const cardTemplate = document.querySelector('#card-template').content.querySelector('.card');
-const formInputName = document.querySelector('[name="name-add"]');
-const formInputLink = document.querySelector('[name="link-add"]');
-const popupCardSubtitle = document.querySelector('.popup__card-subtitle');
-const popupCardImage = document.querySelector('.popup__card-img');
+
 
 // Функции
 
-const renderCard = (item) => {
-  cardsContainer.prepend(createElement(item));
+const renderCard = (item, container) => {
+  const card = new Card(item, cardTemplate, handleCardClick);
+  const cardElement = card.generateCard();
+
+  container.append(cardElement);
 };
 
-const handleCardClick = (e) => {
-  popupCardImage.src = e.target.src;
-  popupCardImage.alt = e.target.alt;
-  popupCardSubtitle.textContent = e.target.alt;
+const handleCardClick = (name, link) => {
+  popupCardSubtitle.textContent = name;
+  popupCardImage.src = link;
+  popupCardImage.alt = name;
+
   openPopup(popupCard);
-}
-
-const handleDeleteButtonClick = (e) => {
-  e.target.closest('.card').remove();
-}
-
-const handleLikeButtonClick = (e) => {
-  e.target.classList.toggle('card__heart-button_active');
 }
 
 function openPopup(popup) {
@@ -85,34 +82,7 @@ function handleCardFormSubmit(evt) {
   evt.target.reset();
 }
 
-function createElement(item) {
-  const card = cardTemplate.cloneNode(true);
-  const cardTitle = card.querySelector('.card__subtitle');
-  const deleteButton = card.querySelector('.card__delete-button');
-  const likeButton = card.querySelector('.card__heart-button');
-  const cardImg = card.querySelector('.card__image');
-
-  cardImg.src = item.link;
-  cardImg.alt = item.name;
-  cardTitle.textContent = item.name;
-
-  deleteButton.addEventListener('click', handleDeleteButtonClick);
-  likeButton.addEventListener('click', handleLikeButtonClick);
-  cardImg.addEventListener('click', handleCardClick);
-
-  return card;
-
-}
-
 // Обработчики событий
-
-popupAddButtonElement.addEventListener('click',function openAddPopup() {
-  openPopup(popupAdd);
-});
-popupEditButtonElement.addEventListener('click', function openEditPopup() {
-  openPopup(popupEdit);
-  fillProfileInputs ();
-});
 
 popups.forEach((popup) => {
   popup.addEventListener('mousedown', (evt) => {
@@ -125,30 +95,32 @@ popups.forEach((popup) => {
   })
 })
 
+popupAddButtonElement.addEventListener('click',function openAddPopup() {
+  openPopup(popupAdd);
+});
+popupEditButtonElement.addEventListener('click', function openEditPopup() {
+  openPopup(popupEdit);
+  fillProfileInputs ();
+});
+
 formElementEdit.addEventListener('submit', handleProfileFormSubmit);
 formElementAdd.addEventListener('submit', handleCardFormSubmit);
 
+// Экземпляры валидации форм
 
 const formValidatorEdit = new FormValidator(config, formElementEdit);
 formValidatorEdit.enableValidation();
 const formValidatorAdd = new FormValidator(config, formElementAdd)
 formValidatorAdd.enableValidation();
 
-initialCards.forEach((item) => {
-  const card = new Card(item, '#card-template', openPopup(popupCard));
-  const cardElement = card.generateCard();
 
-  cardsContainer.append(cardElement);
+initialCards.forEach((item) => {
+  renderCard(item, cardsContainer);
 })
 
 
 
-// Рендер карточек
 
-// initialCards.forEach((item) => {
-//   const element = createElement(item);
-//   cardsContainer.append(element);
-// })
 
 
 

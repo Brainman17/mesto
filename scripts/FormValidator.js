@@ -1,14 +1,7 @@
 export class FormValidator {
-  constructor(selector, formElement) {
+  constructor(config, formElement) {
     this._formElement = formElement;
-    this._selector = selector;
-    this._formSelector = selector.formSelector;
-    this._inputSelector = selector.inputSelector;
-    this._submitButtonSelector = selector.submitButtonSelector;
-    this._inactiveButtonClass = selector.inactiveButtonClass;
-    this._inputMarginOut = selector.inputMarginOut;
-    this._inputErrorClass = selector.inputErrorClass;
-    this._errorClass = selector.errorClass;
+    this._config = config;
   }
 
   _checkInputValidity = (input) => {
@@ -16,12 +9,12 @@ export class FormValidator {
 
     if(input.validity.valid) {
       error.textContent = '';
-      input.classList.remove(this._errorClass, this._inputMarginOut);
-      error.classList.remove(this._inputErrorClass);
+      input.classList.remove(this._config.errorClass, this._config.inputMarginOut);
+      error.classList.remove(this._config.inputErrorClass);
     } else {
       error.textContent = input.validationMessage;
-      input.classList.add(this._errorClass,  this._inputMarginOut);
-      error.classList.add(this._inputErrorClass);
+      input.classList.add(this._config.errorClass,  this._config.inputMarginOut);
+      error.classList.add(this._config.inputErrorClass);
     }
   }
 
@@ -29,35 +22,35 @@ export class FormValidator {
     const isFormValid = inputs.every(input => input.validity.valid);
 
     if(isFormValid) {
-      button.classList.remove(this._inactiveButtonClass);
+      button.classList.remove(this._config.inactiveButtonClass);
       button.disabled = '';
     } else {
-      button.classList.add(this._inactiveButtonClass);
+      button.classList.add(this._config.inactiveButtonClass);
       button.disabled = 'disabled';
     }
   }
 
   enableValidation = (config) => {
-    const { formSelector, inputSelector, submitButtonSelector, ...restObject } = config;
-    const forms = [...document.querySelectorAll(this._formSelector)];
+    const { formSelector, inputSelector, submitButtonSelector, ...restObject } = config || {};
+    const forms = [...this._formElement.querySelectorAll(this._formSelector)];
 
     forms.forEach(form => {
-      const inputs = [...form.querySelectorAll(this._inputSelector)];
-      const button = form.querySelector(this._submitButtonSelector);
+      const inputs = [...form.querySelectorAll(this._config.inputSelector)];
+      const button = form.querySelector(this._config.submitButtonSelector);
 
       form.addEventListener('submit', (e) => {
         e.preventDefault();
       })
       form.addEventListener('reset', () => {
         setTimeout(() => {
-          _toggleButtonVisibility(inputs, button, restObject);
+          this._toggleButtonVisibility(inputs, button, restObject);
         }, 0)
         })
       inputs.forEach(input => {
         input.addEventListener('input', () => {
 
-          _checkInputValidity(input, restObject);
-          _toggleButtonVisibility(inputs, button, restObject);
+          this._checkInputValidity(input, restObject);
+          this._toggleButtonVisibility(inputs, button, restObject);
           })
         })
       })
