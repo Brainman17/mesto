@@ -24,22 +24,14 @@ const jobInput = formElementEdit.querySelector('.popup__form-subtitle_value_job'
 const profileName = document.querySelector('.profile__title');
 const profileJob = document.querySelector('.profile__subtitle');
 const cardsContainer = document.querySelector('.cards');
-const cardTemplate = document.querySelector('#card-template').content.querySelector('.card');
-
+const templateSelector = '#card-template';
 
 // Функции
 
-const renderCard = (item, container) => {
-  const card = new Card(item, cardTemplate, handleCardClick);
-  const cardElement = card.generateCard();
-
-  container.append(cardElement);
-};
-
 const handleCardClick = (name, link) => {
   popupCardSubtitle.textContent = name;
-  popupCardImage.src = link;
   popupCardImage.alt = name;
+  popupCardImage.src = link;
 
   openPopup(popupCard);
 }
@@ -98,6 +90,7 @@ popups.forEach((popup) => {
 popupAddButtonElement.addEventListener('click',function openAddPopup() {
   openPopup(popupAdd);
 });
+
 popupEditButtonElement.addEventListener('click', function openEditPopup() {
   openPopup(popupEdit);
   fillProfileInputs ();
@@ -110,13 +103,20 @@ formElementAdd.addEventListener('submit', handleCardFormSubmit);
 
 const formValidatorEdit = new FormValidator(config, formElementEdit);
 formValidatorEdit.enableValidation();
+
 const formValidatorAdd = new FormValidator(config, formElementAdd)
 formValidatorAdd.enableValidation();
 
+const renderCard = (item, container) => {
+  const card = new Card(item, templateSelector, handleCardClick);
+  const cardElement = card.generateCard();
+
+  container.prepend(cardElement);
+};
 
 initialCards.forEach((item) => {
   renderCard(item, cardsContainer);
-})
+});
 
 
 

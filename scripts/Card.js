@@ -8,7 +8,7 @@ export class Card {
   _getTemplate() {
     const cardElement = document
     .querySelector(this._templateSelector)
-    .content('.card')
+    .content.querySelector('.card')
     .cloneNode(true);
 
     return cardElement;
@@ -26,6 +26,7 @@ export class Card {
     this._element = this._getTemplate();
     this._elementDeleteButton = this._element.querySelector('.card__delete-button');
     this._elementLikeButton = this._element.querySelector('.card__heart-button');
+    this._elementImg = this._element.querySelector('.card__image');
 
     this._elementDeleteButton.addEventListener('click', this._handleDeleteButtonClick);
     this._elementLikeButton.addEventListener('click', this._handleLikeButtonClick);
@@ -41,7 +42,7 @@ export class Card {
     this._elementImg.alt = this._data.name;
     this._elementTitle.textContent = this._data.name;
 
-    _addEventListeners();
+    this._addEventListeners();
 
     return this._element;
   }
