@@ -32,7 +32,7 @@ export class FormValidator {
 
   enableValidation = (config) => {
     const { formSelector, inputSelector, submitButtonSelector, ...restObject } = config || {};
-    const forms = [...this._formElement.querySelectorAll(this._formSelector)];
+    const forms = [...this._formElement.querySelectorAll(this._config.formSelector)];
 
     forms.forEach(form => {
       const inputs = [...form.querySelectorAll(this._config.inputSelector)];

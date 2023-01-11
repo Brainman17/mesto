@@ -5,13 +5,10 @@ export class Card {
     this._handleImageClick = handleImageClick;
   }
 
-  _getTemplate() {
-    const cardElement = document
-    .querySelector(this._templateSelector)
-    .content.querySelector('.card')
-    .cloneNode(true);
+  _getTemplate = () => {
+    return document.querySelector(this._templateSelector)
+    .content.querySelector('.card');
 
-    return cardElement;
   }
 
   _handleDeleteButtonClick(evt) {
@@ -23,30 +20,31 @@ export class Card {
   }
 
   _addEventListeners() {
-    this._element = this._getTemplate();
-    this._elementDeleteButton = this._element.querySelector('.card__delete-button');
-    this._elementLikeButton = this._element.querySelector('.card__heart-button');
-    this._elementImg = this._element.querySelector('.card__image');
+    const cardElementDeleteButton = this._cardElement.querySelector('.card__delete-button');
+    const cardElementLikeButton = this._cardElement.querySelector('.card__heart-button');
 
-    this._elementDeleteButton.addEventListener('click', this._handleDeleteButtonClick);
-    this._elementLikeButton.addEventListener('click', this._handleLikeButtonClick);
-    this._elementImg.addEventListener('click', () => this._handleImageClick(this._data.name, this._data.link));
+    cardElementDeleteButton.addEventListener('click', this._handleDeleteButtonClick);
+    cardElementLikeButton.addEventListener('click', this._handleLikeButtonClick);
+    this._cardElementImage.addEventListener('click', () => this._handleImageClick(this._data.name, this._data.link));
+
   }
 
   generateCard() {
-    this._element = this._getTemplate();
-    this._elementImg = this._element.querySelector('.card__image');
-    this._elementTitle = this._element.querySelector('.card__subtitle');
+    const cardTemplate = this._getTemplate();
 
-    this._elementImg.src = this._data.link;
-    this._elementImg.alt = this._data.name;
-    this._elementTitle.textContent = this._data.name;
+    this._cardElement = cardTemplate.cloneNode(true);
+
+    this._cardElementImage = this._cardElement.querySelector('.card__image');
+    this._cardElementTitle = this._cardElement.querySelector('.card__subtitle');
+
+
+    this._cardElementImage.src = this._data.link;
+    this._cardElementImage.alt = this._data.name;
+    this._cardElementTitle.textContent = this._data.name;
 
     this._addEventListeners();
 
-    return this._element;
+    return this._cardElement;
   }
 }
-
-
 
