@@ -30,8 +30,8 @@ export class FormValidator {
     }
   }
 
-  enableValidation = (config) => {
-    const { formSelector, inputSelector, submitButtonSelector, ...restObject } = config || {};
+  enableValidation = () => {
+    const { formSelector, inputSelector, submitButtonSelector, ...restObject } = this._config;
     const forms = [...this._formElement.querySelectorAll(this._config.formSelector)];
 
     forms.forEach(form => {
@@ -112,8 +112,6 @@ export class FormValidator {
 //       })
 //     })
 //   }
-
-
 
 
 
