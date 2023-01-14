@@ -112,7 +112,7 @@ const renderCard = (item, container) => {
   const card = new Card(item, templateSelector, handleCardClick);
   const cardElement = card.generateCard();
 
-  container.prepend(cardElement);
+  container.append(cardElement);
 };
 
 initialCards.forEach((item) => {
