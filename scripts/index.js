@@ -8,7 +8,7 @@ import {initialCards} from './initialCards.js';
 const popups = document.querySelectorAll('.popup');
 const popupAdd = document.querySelector('.popup_add');
 const popupEdit = document.querySelector('.popup_edit');
-const popupCard= document.querySelector('.popup_card');
+const popupCard = document.querySelector('.popup_card');
 const popupAddButtonElement = document.querySelector('.profile__add-button');
 const popupEditButtonElement = document.querySelector('.profile__edit-button');
 const popupCardSubtitle = document.querySelector('.popup__card-subtitle');
@@ -69,7 +69,7 @@ function handleCardFormSubmit(evt) {
   evt.preventDefault();
   closePopup(popupAdd);
   renderCard({ name: formInputName.value,
-    link: formInputLink.value});
+    link: formInputLink.value}, cardsContainer);
 
   evt.target.reset();
 }
@@ -112,7 +112,7 @@ const renderCard = (item, container) => {
   const card = new Card(item, templateSelector, handleCardClick);
   const cardElement = card.generateCard();
 
-  container.append(cardElement);
+  container.prepend(cardElement);
 };
 
 initialCards.forEach((item) => {
