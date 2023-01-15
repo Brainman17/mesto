@@ -99,7 +99,6 @@ popupEditButtonElement.addEventListener('click', function openEditPopup() {
 formElementEdit.addEventListener('submit', handleProfileFormSubmit);
 formElementAdd.addEventListener('submit', handleCardFormSubmit);
 
-
 // Экземпляры валидации форм
 
 const formValidatorEdit = new FormValidator(config, formElementEdit);
