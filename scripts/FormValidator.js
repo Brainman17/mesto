@@ -23,31 +23,31 @@ _toggleButtonVisibility = (inputs, button) => {
 
   if(isFormValid) {
     button.classList.remove(this._config.inactiveButtonClass);
-    button.disabled = '';
+    button.disabled = false;
   } else {
     button.classList.add(this._config.inactiveButtonClass);
-    button.disabled = 'disabled';
+    button.disabled = true;
   }
 }
 
-enableValidation = (object) => {
+enableValidation = () => {
 
-  const inputs = [...this._formElement.querySelectorAll(this._config.inputSelector)];
-  const button = this._formElement.querySelector(this._config.submitButtonSelector);
+  this._inputs = [...this._formElement.querySelectorAll(this._config.inputSelector)];
+  this._button = this._formElement.querySelector(this._config.submitButtonSelector);
 
   this._formElement.addEventListener('submit', (e) => {
     e.preventDefault();
   });
   this._formElement.addEventListener('reset', () => {      setTimeout(() => {
-      this._toggleButtonVisibility(inputs, button);
+      this._toggleButtonVisibility(this._inputs, this._button);
     }, 0)
   });
 
-  inputs.forEach(input => {
+  this._inputs.forEach(input => {
 
     input.addEventListener('input', () => {
         this._checkInputValidity(input);
-        this._toggleButtonVisibility(inputs, button);
+        this._toggleButtonVisibility(this._inputs, this._button);
     });
   });
   }

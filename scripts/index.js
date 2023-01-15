@@ -108,20 +108,22 @@ formValidatorEdit.enableValidation();
 const formValidatorAdd = new FormValidator(config, formElementAdd)
 formValidatorAdd.enableValidation();
 
-const renderCard = (item, container) => {
+const renderCard = (cardElement, container) => {
+  container.prepend(cardElement);
+}
+
+const createCard = (item) => {
   const card = new Card(item, templateSelector, handleCardClick);
   const cardElement = card.generateCard();
 
-  container.prepend(cardElement);
+  renderCard(cardElement, cardsContainer);
+
+  return cardElement;
 };
 
 initialCards.forEach((item) => {
-  renderCard(item, cardsContainer);
+  createCard(item);
 });
-
-
-
-
 
 
 

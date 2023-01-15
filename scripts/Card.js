@@ -7,36 +7,31 @@ export class Card {
 
   _getTemplate = () => {
     return document.querySelector(this._templateSelector)
-    .content.querySelector('.card');
-
+    .content.querySelector('.card').cloneNode(true);
   }
 
-  _handleDeleteButtonClick(evt) {
-    evt.target.closest('.card').remove();
+  _handleDeleteButtonClick() {
+    this._cardTemplate.remove();
   }
 
-  _handleLikeButtonClick(evt) {
-    evt.target.classList.toggle('card__heart-button_active');
+  _handleLikeButtonClick() {
+    this._buttonLike.classList.toggle('card__heart-button_active');
   }
 
   _addEventListeners() {
-    const cardElementDeleteButton = this._cardElement.querySelector('.card__delete-button');
-    const cardElementLikeButton = this._cardElement.querySelector('.card__heart-button');
+    this._buttonDelete = this._cardTemplate.querySelector('.card__delete-button');
+    this._buttonLike = this._cardTemplate.querySelector('.card__heart-button');
 
-    cardElementDeleteButton.addEventListener('click', this._handleDeleteButtonClick);
-    cardElementLikeButton.addEventListener('click', this._handleLikeButtonClick);
+    this._buttonDelete.addEventListener('click', () => this._handleDeleteButtonClick());
+    this._buttonLike.addEventListener('click', () => this._handleLikeButtonClick());
     this._cardElementImage.addEventListener('click', () => this._handleImageClick(this._data.name, this._data.link));
-
   }
 
   generateCard() {
-    const cardTemplate = this._getTemplate();
+    this._cardTemplate = this._getTemplate();
 
-    this._cardElement = cardTemplate.cloneNode(true);
-
-    this._cardElementImage = this._cardElement.querySelector('.card__image');
-    this._cardElementTitle = this._cardElement.querySelector('.card__subtitle');
-
+    this._cardElementImage = this._cardTemplate.querySelector('.card__image');
+    this._cardElementTitle = this._cardTemplate.querySelector('.card__subtitle');
 
     this._cardElementImage.src = this._data.link;
     this._cardElementImage.alt = this._data.name;
@@ -44,7 +39,7 @@ export class Card {
 
     this._addEventListeners();
 
-    return this._cardElement;
+    return this._cardTemplate;
   }
 }
 
