@@ -54,11 +54,11 @@ function handleProfileFormSubmit(evt, values) {
 function handleCardFormSubmit(evt, values) {
   evt.preventDefault();
 
-  renderItems({ name: values['name-add'],
-      link: values.link
-    });
+  // renderItems({ name: values['name-add'],
+  //     link: values.link
+  //   });
 
-  addItem(cardsContainer);
+  addItem();
   addCardPopup.close();
 }
 
