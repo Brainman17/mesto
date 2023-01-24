@@ -1,0 +1,26 @@
+{
+  "name": "mesto",
+  "version": "1.0.0",
+  "description": "### Описание проекта Интерактивная страница, где можно добавлять фотографии, удалять их и ставить лайки. Реализуется всплывающее диалоговое окно (в простонародье *Попап*). На JavaScript написана логика его открытия и закрытия, а также способность редактировать значения полей ввода.",
+  "main": "index.js",
+  "scripts": {
+    "dev": "webpack"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Brainman17/mesto.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Brainman17/mesto/issues"
+  },
+  "homepage": "https://github.com/Brainman17/mesto#readme",
+  "dependencies": {
+    "webpack": "^5.75.0"
+  },
+  "devDependencies": {
+    "webpack-cli": "^5.0.1",
+    "webpack-dev-server": "^4.11.1"
+  }
+}

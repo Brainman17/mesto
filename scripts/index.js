@@ -25,40 +25,31 @@ const nameInput = formElementEdit.querySelector(
 const jobInput = formElementEdit.querySelector(
   ".popup__form-subtitle_value_job"
 );
-const profileName = document.querySelector(".profile__title");
-const profileJob = document.querySelector(".profile__subtitle");
+
 const cardsContainer = document.querySelector(".cards");
 const templateSelector = "#card-template";
 
 // Функции
 
-const handleCardClick = (name, link) => {
+function handleCardClick(name, link) {
   imageCardPopup.open(name, link);
 };
 
-// function fillProfileInputs() {
-//   const { name, description } = userInfo.getUserInfo();
-
-//   nameInput.value = name;
-//   jobInput.value = description;
-// }
-
 function handleProfileFormSubmit(evt, values) {
   evt.preventDefault();
-  userInfo.setUserInfo(values.name, values.description);
-  // profileName.textContent = nameInput.value;
-  // profileJob.textContent = jobInput.value;
+  userInfo.setUserInfo(values.name, values.job);
   editCardPopup.close();
 }
 
-function handleCardFormSubmit(evt, values) {
+function createCard(item){
+  const card = new Card(item, templateSelector, handleCardClick)
+  const cardElement = card.generateCard();
+  listOfCards.addItem(cardElement);
+}
+
+function handleCardFormSubmit(evt, item) {
   evt.preventDefault();
-
-  // renderItems({ name: values['name-add'],
-  //     link: values.link
-  //   });
-
-  addItem();
+  createCard(item);
   addCardPopup.close();
 }
 
@@ -69,8 +60,8 @@ popupAddButtonElement.addEventListener("click", () => {
 });
 
 popupEditButtonElement.addEventListener("click", () => {
-  const { name, description } = userInfo.getUserInfo();
-  editCardPopup.setFormValues({ name, description });
+  const { name, job } = userInfo.getUserInfo();
+  editCardPopup.setFormValues({ name, job });
   editCardPopup.open();
 });
 
@@ -82,9 +73,7 @@ formElementAdd.addEventListener("submit", handleCardFormSubmit);
 const listOfCards = new Section( {
   initialCards: initialCards,
   renderer: (item) => {
-    const card = new Card(item, templateSelector, handleCardClick)
-    const cardElement = card.generateCard();
-    listOfCards.addItem(cardElement);
+    createCard(item);
   },
 },
   '.cards'
@@ -100,7 +89,7 @@ editCardPopup.setEventListeners();
 const imageCardPopup = new PopupWithImage(".popup_card");
 imageCardPopup.setEventListeners();
 
-const userInfo = new UserInfo({ userNameSelector: '.profile__title', userDescriptionSelector: '.profile__subtitle'});
+const userInfo = new UserInfo({ userNameSelector: '.profile__title', userJobSelector: '.profile__subtitle'});
 
 const formValidatorEdit = new FormValidator(config, formElementEdit);
 formValidatorEdit.enableValidation();
