@@ -3,11 +3,9 @@ import { Card } from "./Card.js";
 import { config } from "./config.js";
 import { initialCards } from "./initialCards.js";
 import { Section } from "./Section.js";
-import { Popup } from "./Popup.js";
 import { PopupWithImage } from "./PopupWithImage.js";
 import { PopupWithForm } from "./PopupWithForm.js";
 import { UserInfo } from "./UserInfo.js";
-
 
 // Переменные
 
@@ -30,6 +28,11 @@ const cardsContainer = document.querySelector(".cards");
 const templateSelector = "#card-template";
 
 // Функции
+function createCard(item){
+  const card = new Card(item, templateSelector, handleCardClick)
+  const cardElement = card.generateCard();
+  listOfCards.addItem(cardElement);
+}
 
 function handleCardClick(name, link) {
   imageCardPopup.open(name, link);
@@ -37,14 +40,8 @@ function handleCardClick(name, link) {
 
 function handleProfileFormSubmit(evt, values) {
   evt.preventDefault();
-  userInfo.setUserInfo(values.name, values.job);
+  userInfo.setUserInfo(values.name, values.about);
   editCardPopup.close();
-}
-
-function createCard(item){
-  const card = new Card(item, templateSelector, handleCardClick)
-  const cardElement = card.generateCard();
-  listOfCards.addItem(cardElement);
 }
 
 function handleCardFormSubmit(evt, item) {
@@ -55,18 +52,18 @@ function handleCardFormSubmit(evt, item) {
 
 // Обработчики событий
 
-popupAddButtonElement.addEventListener("click", () => {
+popupAddButtonElement.addEventListener('click', () => {
   addCardPopup.open();
 });
 
-popupEditButtonElement.addEventListener("click", () => {
-  const { name, job } = userInfo.getUserInfo();
-  editCardPopup.setFormValues({ name, job });
+popupEditButtonElement.addEventListener('click', () => {
+  const { name, about } = userInfo.getUserInfo();
+  editCardPopup.setFormValues({ name, about });
   editCardPopup.open();
 });
 
-formElementEdit.addEventListener("submit", handleProfileFormSubmit);
-formElementAdd.addEventListener("submit", handleCardFormSubmit);
+formElementEdit.addEventListener('submit', handleProfileFormSubmit);
+formElementAdd.addEventListener('submit', handleCardFormSubmit);
 
 // Экземпляры
 
@@ -80,13 +77,13 @@ const listOfCards = new Section( {
 );
 listOfCards.renderItems();
 
-const addCardPopup = new PopupWithForm(".popup_add", handleCardFormSubmit);
+const addCardPopup = new PopupWithForm('.popup_add', handleCardFormSubmit);
 addCardPopup.setEventListeners();
 
-const editCardPopup = new PopupWithForm(".popup_edit", handleProfileFormSubmit);
+const editCardPopup = new PopupWithForm('.popup_edit', handleProfileFormSubmit);
 editCardPopup.setEventListeners();
 
-const imageCardPopup = new PopupWithImage(".popup_card");
+const imageCardPopup = new PopupWithImage('.popup_card');
 imageCardPopup.setEventListeners();
 
 const userInfo = new UserInfo({ userNameSelector: '.profile__title', userJobSelector: '.profile__subtitle'});
