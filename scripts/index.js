@@ -28,6 +28,7 @@ const cardsContainer = document.querySelector(".cards");
 const templateSelector = "#card-template";
 
 // Функции
+
 function createCard(item){
   const card = new Card(item, templateSelector, handleCardClick)
   const cardElement = card.generateCard();
