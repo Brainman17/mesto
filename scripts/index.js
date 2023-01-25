@@ -14,17 +14,7 @@ const popupEditButtonElement = document.querySelector(".profile__edit-button");
 
 const formElementEdit = document.forms["form-edit"];
 const formElementAdd = document.forms["form-add"];
-const formInputName = document.querySelector('[name="name-add"]');
-const formInputLink = document.querySelector('[name="link-add"]');
 
-const nameInput = formElementEdit.querySelector(
-  ".popup__form-subtitle_value_name"
-);
-const jobInput = formElementEdit.querySelector(
-  ".popup__form-subtitle_value_job"
-);
-
-const cardsContainer = document.querySelector(".cards");
 const templateSelector = "#card-template";
 
 // Функции
@@ -39,12 +29,14 @@ function handleCardClick(name, link) {
   imageCardPopup.open(name, link);
 };
 
-function handleProfileFormSubmit(values) {
+function handleProfileFormSubmit(evt, values) {
+  evt.preventDefault();
   userInfo.setUserInfo(values.name, values.about);
   editCardPopup.close();
 }
 
-function handleCardFormSubmit(item) {
+function handleCardFormSubmit(evt, item) {
+  evt.preventDefault();
   createCard(item);
   addCardPopup.close();
 }
