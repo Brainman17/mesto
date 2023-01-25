@@ -39,14 +39,12 @@ function handleCardClick(name, link) {
   imageCardPopup.open(name, link);
 };
 
-function handleProfileFormSubmit(evt, values) {
-  evt.preventDefault();
+function handleProfileFormSubmit(values) {
   userInfo.setUserInfo(values.name, values.about);
   editCardPopup.close();
 }
 
-function handleCardFormSubmit(evt, item) {
-  evt.preventDefault();
+function handleCardFormSubmit(item) {
   createCard(item);
   addCardPopup.close();
 }
@@ -62,9 +60,6 @@ popupEditButtonElement.addEventListener('click', () => {
   editCardPopup.setFormValues({ name, about });
   editCardPopup.open();
 });
-
-formElementEdit.addEventListener('submit', handleProfileFormSubmit);
-formElementAdd.addEventListener('submit', handleCardFormSubmit);
 
 // Экземпляры
 
