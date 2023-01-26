@@ -18,7 +18,6 @@
   },
   "homepage": "https://github.com/Brainman17/mesto#readme",
   "dependencies": {
-    "core-js": "^3.27.2",
     "webpack": "^5.75.0"
   },
   "devDependencies": {
@@ -26,6 +25,8 @@
     "autoprefixer": "^10.4.13",
     "babel-loader": "^9.1.2",
     "clean-webpack-plugin": "^4.0.0",
+    "core-js": "^3.27.2",
+    "corejs": "^1.0.0",
     "css-loader": "^6.7.3",
     "cssnano": "^5.1.14",
     "html-webpack-plugin": "^5.5.0",

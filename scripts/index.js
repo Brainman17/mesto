@@ -7,6 +7,8 @@ import { PopupWithImage } from "./PopupWithImage.js";
 import { PopupWithForm } from "./PopupWithForm.js";
 import { UserInfo } from "./UserInfo.js";
 
+import '../pages/index.css'
+
 // Переменные
 
 const popupAddButtonElement = document.querySelector(".profile__add-button");
