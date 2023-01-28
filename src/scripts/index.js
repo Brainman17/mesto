@@ -34,25 +34,25 @@ function handleCardClick(name, link) {
 function handleProfileFormSubmit(evt, values) {
   evt.preventDefault();
   userInfo.setUserInfo(values.name, values.about);
-  editCardPopup.close();
+  popupEditProfile.close();
 }
 
 function handleCardFormSubmit(evt, item) {
   evt.preventDefault();
   createCard(item);
-  addCardPopup.close();
+  popupAddCard.close();
 }
 
 // Обработчики событий
 
 popupAddButtonElement.addEventListener('click', () => {
-  addCardPopup.open();
+  popupAddCard.open();
 });
 
 popupEditButtonElement.addEventListener('click', () => {
   const { name, about } = userInfo.getUserInfo();
-  editCardPopup.setFormValues({ name, about });
-  editCardPopup.open();
+  popupEditProfile.setFormValues({ name, about });
+  popupEditProfile.open();
 });
 
 // Экземпляры
@@ -67,11 +67,11 @@ const listOfCards = new Section( {
 );
 listOfCards.renderItems();
 
-const addCardPopup = new PopupWithForm('.popup_add', handleCardFormSubmit);
-addCardPopup.setEventListeners();
+const popupAddCard = new PopupWithForm('.popup_add', handleCardFormSubmit);
+popupAddCard.setEventListeners();
 
-const editCardPopup = new PopupWithForm('.popup_edit', handleProfileFormSubmit);
-editCardPopup.setEventListeners();
+const popupEditProfile = new PopupWithForm('.popup_edit', handleProfileFormSubmit);
+popupEditProfile.setEventListeners();
 
 const imageCardPopup = new PopupWithImage('.popup_card');
 imageCardPopup.setEventListeners();
