@@ -7,4 +7,4 @@
 
 **GitHub Pages**
 
-* [Ссылка на GitHub Pages]( https://brainman17.github.io/mesto/index.html)
+* [Ссылка на GitHub Pages](https://brainman17.github.io/mesto/)

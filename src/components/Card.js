@@ -1,8 +1,10 @@
 export class Card {
-  constructor(data, templateSelector, handleImageClick) {
+  constructor(data, templateSelector, handleImageClick, handleDeleteClick, handleLikeClick) {
     this._data = data;
     this._templateSelector = templateSelector;
     this._handleImageClick = handleImageClick;
+    this._handleDeleteClick = handleDeleteClick;
+    this._handleLikeClick = handleLikeClick;
   }
 
   _getTemplate = () => {
