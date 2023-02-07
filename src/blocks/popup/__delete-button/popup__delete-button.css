@@ -17,3 +17,12 @@
 .popup__delete-button:hover {
   opacity: .8;
 }
+
+@media  screen and (max-width: 640px) {
+  .popup__delete-button {
+    padding: 14px 82px;
+    margin-top: -15px;
+    font-size: 14px;
+    line-height: 17px;
+  }
+}

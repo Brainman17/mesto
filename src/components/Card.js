@@ -1,8 +1,9 @@
 export class Card {
-  constructor(data, templateSelector, handleImageClick, handleDeleteClick, handleLikeClick) {
+  constructor(data, templateSelector, handleImageClick, userId, handleDeleteClick, handleLikeClick) {
     this._data = data;
     this._templateSelector = templateSelector;
     this._handleImageClick = handleImageClick;
+    this._userId = userId;
     this._handleDeleteClick = handleDeleteClick;
     this._handleLikeClick = handleLikeClick;
   }
@@ -40,6 +41,13 @@ export class Card {
     this._cardElementTitle.textContent = this._data.name;
 
     this._addEventListeners();
+
+    // Взять длину массива лайков и вставить в элемент '.card__like-counter'
+    this._cardTemplate.querySelector('.card__like-counter').textContent = this._data.likes.length;
+    //Сравнить id мой с id ownera
+    if(this._userId !== this._data.owner._id) {
+      this._buttonDelete.style.display = 'none';
+    }
 
     return this._cardTemplate;
   }

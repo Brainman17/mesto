@@ -12,17 +12,19 @@
     </header>
     <main class="page__content">
       <section class="profile page__profile">
-        <img
-          src="<%=require('./images/Jacques-Yves-Cousteau.jpg')%>"
-          alt="Аватар"
-          class="profile__avatar"
-        />
+        <div class="profile__avatar-wrap">
+          <img
+            src="<%=require('./images/Jacques-Yves-Cousteau.jpg')%>"
+            alt="Аватар"
+            class="profile__avatar"
+          />
+        </div>
         <div class="profile__info">
           <div class="profile__wrapper">
-            <h1 class="profile__title">Жак-Ив Кусто</h1>
+            <h1 class="profile__title"></h1>
             <button class="profile__edit-button" type="button"></button>
           </div>
-          <h2 class="profile__subtitle">Исследователь океана</h2>
+          <h2 class="profile__subtitle"></h2>
         </div>
         <button class="profile__add-button" type="button"></button>
       </section>
@@ -150,30 +152,30 @@
       </div>
     </section>
 
-    <section class="popup popup_avatar-update popup_opened">
-      <div class="popup__container">
+    <section class="popup popup_avatar-update">
+      <div class="popup__container-avatar">
         <h2 class="popup__title">Обновить аватар</h2>
         <form
         id="form-avatar"
-        class="popup__form popup__form-content popup__form-content_add"
-        name="form-add"
+        class="popup__form popup__form-content popup__form-content_avatar"
+        name="form-avatar"
         novalidate
         >
-        <input
-        type="url"
-        id="url"
-        name="link"
-        placeholder="Ссылка на картинку"
-        class="popup__input popup__form-subtitle popup__form-subtitle_create popup__form-subtitle_value_link"
-        required
-        />
-        <span id="url-error"></span>
-        <input
-        type="submit"
-        value="Сохранить"
-        class="popup__create-button popup__button popup__button_invalid"
-        disabled
-        />
+          <input
+          type="url"
+          id="url"
+          name="link"
+          placeholder="Ссылка на картинку"
+          class="popup__input popup__form-subtitle popup__form-subtitle_create popup__form-subtitle_value_link"
+          required
+          />
+          <span id="url-error"></span>
+          <input
+          type="submit"
+          value="Сохранить"
+          class="popup__create-button popup__button popup__button_invalid"
+          disabled
+          />
         </form>
         <button
         class="popup__close-button popup__close-button_avatar"
@@ -188,7 +190,10 @@
         <button class="card__delete-button" type="button"></button>
         <div class="card__wrapper">
           <h2 class="card__subtitle"></h2>
-          <button class="card__heart-button" type="button"></button>
+          <div class="card__like-wrap">
+            <button class="card__heart-button" type="button"></button>
+            <span class="card__like-counter"></span>
+          </div>
         </div>
       </article>
     </template>

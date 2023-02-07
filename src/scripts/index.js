@@ -1,5 +1,4 @@
 import { config } from "./config.js";
-import { initialCards } from "./initialCards.js";
 import { FormValidator } from "../components/FormValidator.js";
 import { Card } from "../components/Card.js";
 import { Section } from "../components/Section.js";
@@ -18,15 +17,25 @@ const popupDeleteButtonElement = document.querySelector(".card__delete-button");
 
 const formElementEdit = document.forms["form-edit"];
 const formElementAdd = document.forms["form-add"];
+const formElementAvatarUpdate = document.forms["form-avatar"];
 
 const templateSelector = "#card-template";
 
 // Функции
 
 function createCard(item){
-  const card = new Card(item, templateSelector, handleCardClick)
+  const card = new Card(item, templateSelector, handleCardClick, userId);
   const cardElement = card.generateCard();
   listOfCards.addItem(cardElement);
+}
+
+function handleCardFormSubmit(evt, name, link) {
+  evt.preventDefault();
+
+  api.postCreateCard(name, link).then(res => {
+    createCard(res)
+  });
+  popupAddCard.close();
 }
 
 function handleCardClick(name, link) {
@@ -39,18 +48,12 @@ function handleProfileFormSubmit(evt, values) {
   popupEditProfile.close();
 }
 
-function handleCardFormSubmit(evt, item) {
-  evt.preventDefault();
-  createCard(item);
-  popupAddCard.close();
-}
-
 // function handleDeleteCardFormSubmit(evt) {
 //   evt.preventDefault();
 //   popupDeleteCard.close();
 // }
 
-// Обработчики событий
+// // Обработчики событий
 // popupDeleteButtonElement.addEventListener('click', () => {
 //   popupDeleteCard.open();
 // });
@@ -66,16 +69,6 @@ popupEditButtonElement.addEventListener('click', () => {
 });
 
 // Экземпляры
-
-const listOfCards = new Section( {
-  initialCards: initialCards,
-  renderer: (item) => {
-    createCard(item);
-  },
-},
-  '.cards'
-);
-listOfCards.renderItems();
 
 const popupAddCard = new PopupWithForm('.popup_add', handleCardFormSubmit);
 popupAddCard.setEventListeners();
@@ -97,6 +90,16 @@ formValidatorEdit.enableValidation();
 const formValidatorAdd = new FormValidator(config, formElementAdd);
 formValidatorAdd.enableValidation();
 
+const formValidatorAvatarUpdate = new FormValidator(config, formElementAdd);
+formValidatorAvatarUpdate.enableValidation();
+
+const listOfCards = new Section( {
+  renderer: (item) => {
+    createCard(item);
+  },
+},
+  '.cards'
+);
 
 const api = new Api({
   baseUrl: 'https://mesto.nomoreparties.co/v1/cohort-59',
@@ -105,9 +108,21 @@ const api = new Api({
   }
 });
 
+
 api.getInitialCards().then(res => {
   listOfCards.renderItems(res)
-})
+});
+
+let userId;
+
+api.getUserInfo().then(res => {
+  userId = res._id;
+  userInfo.setUserInfo(res.name, res.about)
+});
+
+api.postCreateCard().then(res => {
+  console.log(res);
+});
 
 
 
