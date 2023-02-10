@@ -1,11 +1,12 @@
 export class Card {
-  constructor(data, templateSelector, handleImageClick, userId, handleDeleteClick, handleLikeClick) {
+  constructor(data, templateSelector, handleImageClick, userId, openPopupConfirmation, handleLikeClick) {
     this._data = data;
     this._templateSelector = templateSelector;
     this._handleImageClick = handleImageClick;
     this._userId = userId;
-    this._handleDeleteClick = handleDeleteClick;
+    this._openPopupConfirmation = openPopupConfirmation;
     this._handleLikeClick = handleLikeClick;
+    console.log(this._data)
   }
 
   _getTemplate = () => {
@@ -13,7 +14,7 @@ export class Card {
     .content.querySelector('.card').cloneNode(true);
   }
 
-  _handleDeleteButtonClick() {
+  deleteCard() {
     this._cardTemplate.remove();
   }
 
@@ -25,7 +26,7 @@ export class Card {
     this._buttonDelete = this._cardTemplate.querySelector('.card__delete-button');
     this._buttonLike = this._cardTemplate.querySelector('.card__heart-button');
 
-    this._buttonDelete.addEventListener('click', () => this._handleDeleteButtonClick());
+    this._buttonDelete.addEventListener('click', () => this._openPopupConfirmation());
     this._buttonLike.addEventListener('click', () => this._handleLikeButtonClick());
     this._cardElementImage.addEventListener('click', () => this._handleImageClick(this._data.name, this._data.link));
   }

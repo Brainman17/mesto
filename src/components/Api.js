@@ -28,7 +28,8 @@ export class Api {
       method: 'PATCH',
       headers: this._headers,
       body: JSON.stringify({
-        name, about
+        name: name,
+        about: about
       })
     })
       .then(res => res.ok ? res.json() : Promise.reject(`Ошибка:( ${res.status}`))
@@ -39,7 +40,6 @@ export class Api {
     return fetch(this._baseUrl + '/cards', {
       method: 'POST',
       headers: this._headers,
-      'Content-Type': 'application/json',
       body: JSON.stringify({
         name: name,
         link: link
@@ -49,17 +49,19 @@ export class Api {
       .catch(console.log)
   }
 
-  deleteInitialCards(id) {
-    return fetch(this._baseUrl + '/cards/' + id, {
+  deleteInitialCards(_id) {
+    return fetch(this._baseUrl + '/cards/' + _id, {
       method: 'DELETE',
       headers:  this._headers
     })
-      .then(res => res.ok ? res.json() : Promise.reject(`Ошибка:( ${res.status}`))
+      .then(res => {
+        return res.ok ? res.json() : Promise.reject(`Ошибка:( ${res.status}`)
+      })
       .catch(console.log)
   }
 
-  putLike(id) {
-    return fetch(this._baseUrl + '/cards/' + id + '/likes', {
+  putLike(_id) {
+    return fetch(this._baseUrl + '/cards/' + _id + '/likes', {
       method: 'PUT',
       headers: this._headers
     })
@@ -67,8 +69,8 @@ export class Api {
       .catch(console.log)
   }
 
-  deleteLike(id) {
-    return fetch(this._baseUrl + '/cards/' + id + '/likes', {
+  deleteLike(_id) {
+    return fetch(this._baseUrl + '/cards/' + _id + '/likes', {
       method: 'DELETE',
       headers: this._headers
     })
@@ -76,12 +78,12 @@ export class Api {
       .catch(console.log)
   }
 
-  updateAvatar(id, avatar) {
-    return fetch(this._baseUrl + '/cards/' + id + '/likes', {
+  updateAvatar(avatar) {
+    return fetch(this._baseUrl + '/users/me/avatar', {
       method: 'PATCH',
       headers: this._headers,
       body: JSON.stringify({
-        avatar
+        avatar: avatar
       })
     })
       .then(res => res.ok ? res.json() : Promise.reject(`Ошибка:( ${res.status}`))
