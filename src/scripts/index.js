@@ -25,16 +25,25 @@ const templateSelector = "#card-template";
 // Функции
 
 function createCard(item) {
-  const card = new Card(item, templateSelector, handleCardClick, userId, () => popupWithConfirmation.open(item._id, item.card))
+  const card = new Card(item, templateSelector, handleCardClick, userId, () => popupWithConfirmation.open(item._id, card), handleLikeClick)
   const cardElement = card.generateCard();
   listOfCards.addItem(cardElement);
 }
 
-function handleDeleteCardFormSubmit(_id) {
+function handleLikeClick(_id) {
+  api.putLike(_id).then(res => {
+    console.log(res)
+  })
+  api.deleteLike(_id).then(res => {
+    console.log(res)
+  })
+}
+
+function handleDeleteCardFormSubmit(_id, card) {
   api.deleteInitialCards(_id).then(res => {
     console.log(res);
-
   })
+  card.deleteCard();
 }
 
 const popupWithConfirmation = new PopupWithConfirmation('.popup_delete', handleDeleteCardFormSubmit);
@@ -66,9 +75,9 @@ function handleCardClick(name, link) {
   imageCardPopup.open(name, link);
 };
 
-function handleAvatarFormSubmit(evt, values) {
+function handleAvatarFormSubmit(evt, { avatar }) {
   evt.preventDefault();
-  api.updateAvatar(values.avatar).then(res => console.log(res))
+  api.updateAvatar(avatar).then(res => userInfo.setAvatar(res.avatar));
   popupUpdateAvatar.close()
 }
 
@@ -85,7 +94,6 @@ popupEditButtonElement.addEventListener('click', () => {
 });
 
 popupAvatarButtonElement.addEventListener('click', () => {
-  console.log('was?')
   popupUpdateAvatar.open();
 })
 
@@ -103,7 +111,7 @@ popupEditProfile.setEventListeners();
 const imageCardPopup = new PopupWithImage('.popup_card');
 imageCardPopup.setEventListeners();
 
-const userInfo = new UserInfo({ userNameSelector: '.profile__title', userJobSelector: '.profile__subtitle'});
+const userInfo = new UserInfo({ userNameSelector: '.profile__title', userJobSelector: '.profile__subtitle', userAvatarSelector: '.profile__avatar'});
 
 const formValidatorEdit = new FormValidator(config, formElementEdit);
 formValidatorEdit.enableValidation();
@@ -133,9 +141,9 @@ const api = new Api({
 let userId;
 
 // Promise.all([api.getInitialCards(), api.getUserInfo()]).then(res => {
-//   listOfCards.renderItems(res);
+//   listOfCards.renderItems(res[0]);
 //   userId = res._id;
-//   userInfo.setUserInfo(res.name, res.about);
+//   userInfo.setUserInfo(res[0].name, res[0].about);
 // })
 
 api.getUserInfo().then(res => {

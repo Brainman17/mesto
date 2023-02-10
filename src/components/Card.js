@@ -6,7 +6,6 @@ export class Card {
     this._userId = userId;
     this._openPopupConfirmation = openPopupConfirmation;
     this._handleLikeClick = handleLikeClick;
-    console.log(this._data)
   }
 
   _getTemplate = () => {
