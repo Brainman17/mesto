@@ -33,7 +33,6 @@ export class Api {
       })
     })
       .then(res => res.ok ? res.json() : Promise.reject(`Ошибка:( ${res.status}`))
-      .catch(console.log)
   }
 
   postCreateCard(name, link) {
@@ -46,7 +45,6 @@ export class Api {
       })
     })
       .then(res => res.ok ? res.json() : Promise.reject(`Ошибка:( ${res.status}`))
-      .catch(console.log)
   }
 
   deleteInitialCards(_id) {
@@ -57,7 +55,6 @@ export class Api {
       .then(res => {
         return res.ok ? res.json() : Promise.reject(`Ошибка:( ${res.status}`)
       })
-      .catch(console.log)
   }
 
   putLike(_id) {
@@ -66,7 +63,6 @@ export class Api {
       headers: this._headers
     })
       .then(res => res.ok ? res.json() : Promise.reject(`Ошибка:( ${res.status}`))
-      .catch(console.log)
   }
 
   deleteLike(_id) {
@@ -75,7 +71,6 @@ export class Api {
       headers: this._headers
     })
       .then(res => res.ok ? res.json() : Promise.reject(`Ошибка:( ${res.status}`))
-      .catch(console.log)
   }
 
   updateAvatar(avatar) {
@@ -87,7 +82,6 @@ export class Api {
       })
     })
       .then(res => res.ok ? res.json() : Promise.reject(`Ошибка:( ${res.status}`))
-      .catch(console.log)
   }
 }
 
