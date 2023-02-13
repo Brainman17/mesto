@@ -38,21 +38,25 @@ function createCard(item) {
 }
 
 function handlePutLike(_id, card) {
-  api.putLike(_id).then((res) => {
-    card.countLikes(res.likes);
-    card.handleLikeButtonClick();
-    console.log(res);
-  })
-  .catch(console.log);
+  api
+    .putLike(_id)
+    .then((res) => {
+      card.countLikes(res.likes);
+      card.handleLikeButtonClick();
+      console.log(res);
+    })
+    .catch(console.log);
 }
 
 function handleDeleteLike(_id, card) {
-  api.deleteLike(_id).then((res) => {
-    card.countLikes(res.likes);
-    card.handleLikeButtonClick();
-    console.log(res);
-  })
-  .catch(console.log);
+  api
+    .deleteLike(_id)
+    .then((res) => {
+      card.countLikes(res.likes);
+      card.handleLikeButtonClick();
+      console.log(res);
+    })
+    .catch(console.log);
 }
 
 function handleDeleteCardFormSubmit(_id, card) {
@@ -63,7 +67,7 @@ function handleDeleteCardFormSubmit(_id, card) {
       card.deleteCard();
       console.log(res);
     })
-    .catch(console.log)
+    .catch(console.log);
 }
 
 function handleCardFormSubmit(evt, { name, link }) {
@@ -192,10 +196,9 @@ const api = new Api({
 let userId;
 
 Promise.all([api.getUserInfo(), api.getInitialCards()])
-.then(([userData, cards]) => {
-  userId = userData._id;
-  userInfo.setUserInfo(userData.name, userData.about, userData.avatar);
-  listOfCards.renderItems(cards);
-})
-.catch(console.log)
-
+  .then(([userData, cards]) => {
+    userId = userData._id;
+    userInfo.setUserInfo(userData.name, userData.about, userData.avatar);
+    listOfCards.renderItems(cards);
+  })
+  .catch(console.log);

@@ -8,17 +8,16 @@
   </head>
   <body class="page">
     <header class="header page__header">
-      <img src="<%=require('./images/logo.svg')%>" alt="Логотип" class="header__logo" />
+      <img
+        src="<%=require('./images/logo.svg')%>"
+        alt="Логотип"
+        class="header__logo"
+      />
     </header>
     <main class="page__content">
       <section class="profile page__profile">
         <div class="profile__avatar-wrap">
-          <img
-            src=" "
-            alt="Аватар"
-            name="avatar"
-            class="profile__avatar"
-          />
+          <img src=" " alt="Аватар" name="avatar" class="profile__avatar" />
         </div>
         <div class="profile__info">
           <div class="profile__wrapper">
@@ -129,30 +128,30 @@
       <div class="popup__container popup__container-avatar">
         <h2 class="popup__title">Обновить аватар</h2>
         <form
-        id="form-avatar"
-        class="popup__form popup__form-content popup__form-content_avatar"
-        name="form-avatar"
-        novalidate
+          id="form-avatar"
+          class="popup__form popup__form-content popup__form-content_avatar"
+          name="form-avatar"
+          novalidate
         >
           <input
-          type="url"
-          id="avatar"
-          name="avatar"
-          placeholder="Ссылка на картинку"
-          class="popup__input popup__form-subtitle popup__form-subtitle_create popup__form-subtitle_value_link"
-          required
+            type="url"
+            id="avatar"
+            name="avatar"
+            placeholder="Ссылка на картинку"
+            class="popup__input popup__form-subtitle popup__form-subtitle_create popup__form-subtitle_value_link"
+            required
           />
           <span id="avatar-error"></span>
           <input
-          type="submit"
-          value="Сохранить"
-          class="popup__create-button popup__button popup__button_invalid"
-          disabled
+            type="submit"
+            value="Сохранить"
+            class="popup__create-button popup__button popup__button_invalid"
+            disabled
           />
         </form>
         <button
-        class="popup__close-button popup__close-button_avatar"
-        type="button"
+          class="popup__close-button popup__close-button_avatar"
+          type="button"
         ></button>
       </div>
     </section>
@@ -173,15 +172,11 @@
     <section class="popup popup_delete">
       <div class="popup__container-delete">
         <h2 class="popup__title">Вы уверены?</h2>
-        <input
-        type="submit"
-        value="Да"
-        class="popup__delete-button"
-        >
+        <input type="submit" value="Да" class="popup__delete-button" />
         <button
-        class="popup__close-button popup__close-button_delete"
-        type="button"
-      ></button>
+          class="popup__close-button popup__close-button_delete"
+          type="button"
+        ></button>
       </div>
     </section>
 
@@ -198,6 +193,5 @@
         </div>
       </article>
     </template>
-
   </body>
 </html>

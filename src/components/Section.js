@@ -1,5 +1,5 @@
 export class Section {
-  constructor({renderer}, wrapSelector) {
+  constructor({ renderer }, wrapSelector) {
     this._renderer = renderer;
     this._cardsContainer = document.querySelector(wrapSelector);
   }
