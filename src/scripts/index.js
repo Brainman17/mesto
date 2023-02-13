@@ -1,3 +1,15 @@
+import "../pages/index.css";
+
+import {
+  popupAddButtonElement,
+  popupEditButtonElement,
+  popupAvatarButtonElement,
+  formElementEdit,
+  formElementAdd,
+  formElementAvatarUpdate,
+  templateSelector,
+} from "../utils/constants.js";
+
 import { config } from "./config.js";
 import { FormValidator } from "../components/FormValidator.js";
 import { Card } from "../components/Card.js";
@@ -7,20 +19,6 @@ import { PopupWithForm } from "../components/PopupWithForm.js";
 import { PopupWithConfirmation } from "../components/PopupWithConfirmation.js";
 import { UserInfo } from "../components/UserInfo.js";
 import { Api } from "../components/Api.js";
-
-import "../pages/index.css";
-
-// Переменные
-
-const popupAddButtonElement = document.querySelector(".profile__add-button");
-const popupEditButtonElement = document.querySelector(".profile__edit-button");
-const popupAvatarButtonElement = document.querySelector(".profile__avatar");
-
-const formElementEdit = document.forms["form-edit"];
-const formElementAdd = document.forms["form-add"];
-const formElementAvatarUpdate = document.forms["form-avatar"];
-
-const templateSelector = "#card-template";
 
 // Функции
 
@@ -42,26 +40,30 @@ function createCard(item) {
 function handlePutLike(_id, card) {
   api.putLike(_id).then((res) => {
     card.countLikes(res.likes);
+    card.handleLikeButtonClick();
     console.log(res);
-  });
+  })
+  .catch(console.log);
 }
 
 function handleDeleteLike(_id, card) {
   api.deleteLike(_id).then((res) => {
     card.countLikes(res.likes);
+    card.handleLikeButtonClick();
     console.log(res);
-  });
+  })
+  .catch(console.log);
 }
 
 function handleDeleteCardFormSubmit(_id, card) {
   api
     .deleteInitialCards(_id)
     .then((res) => {
-      card.countLikes();
+      popupWithConfirmation.close();
+      card.deleteCard();
       console.log(res);
     })
-    .catch(console.log);
-  card.deleteCard();
+    .catch(console.log)
 }
 
 function handleCardFormSubmit(evt, { name, link }) {
@@ -72,11 +74,10 @@ function handleCardFormSubmit(evt, { name, link }) {
     .postCreateCard(name, link)
     .then((res) => {
       createCard(res);
+      popupAddCard.close();
     })
     .catch(console.log)
     .finally(() => popupAddCard.setButtonText("Создать"));
-
-  popupAddCard.close();
 }
 
 function handleProfileFormSubmit(evt, values) {
@@ -85,11 +86,12 @@ function handleProfileFormSubmit(evt, values) {
 
   api
     .editUserInfo(values.name, values.about)
-    .then((res) => userInfo.setUserInfo(res.name, res.about, res.avatar))
+    .then((res) => {
+      userInfo.setUserInfo(res.name, res.about, res.avatar);
+      popupEditProfile.close();
+    })
     .catch(console.log)
     .finally(() => popupEditProfile.setButtonText("Сохранить"));
-
-  popupEditProfile.close();
 }
 
 function handleAvatarFormSubmit(evt, { avatar }) {
@@ -100,10 +102,10 @@ function handleAvatarFormSubmit(evt, { avatar }) {
     .updateAvatar(avatar)
     .then((res) => {
       userInfo.setAvatar(res.avatar);
+      popupUpdateAvatar.close();
     })
     .catch(console.log)
     .finally(() => popupUpdateAvatar.setButtonText("Да"));
-  popupUpdateAvatar.close();
 }
 
 function handleCardClick(name, link) {
@@ -189,11 +191,11 @@ const api = new Api({
 
 let userId;
 
-api.getUserInfo().then((res) => {
-  userId = res._id;
-  userInfo.setUserInfo(res.name, res.about, res.avatar);
-});
+Promise.all([api.getUserInfo(), api.getInitialCards()])
+.then(([userData, cards]) => {
+  userId = userData._id;
+  userInfo.setUserInfo(userData.name, userData.about, userData.avatar);
+  listOfCards.renderItems(cards);
+})
+.catch(console.log)
 
-api.getInitialCards().then((res) => {
-  listOfCards.renderItems(res);
-});

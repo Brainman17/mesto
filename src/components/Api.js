@@ -5,13 +5,16 @@ export class Api {
     this._headers = this._options.headers;
   }
 
+  _checkResponse(res) {
+    return res.ok ? res.json() : Promise.reject(`Ошибка:( ${res.status}`)
+  }
+
   getInitialCards() {
     return fetch(this._baseUrl + '/cards', {
       method: 'GET',
       headers: this._headers
     })
-      .then(res => res.ok ? res.json() : Promise.reject(`Ошибка:( ${res.status}`))
-      .catch(console.log)
+      .then(this._checkResponse)
   }
 
   getUserInfo() {
@@ -19,8 +22,7 @@ export class Api {
       method: 'GET',
       headers: this._headers
     })
-      .then(res => res.ok ? res.json() : Promise.reject(`Ошибка:( ${res.status}`))
-      .catch(console.log)
+      .then(this._checkResponse)
   }
 
   editUserInfo(name, about) {
@@ -32,7 +34,7 @@ export class Api {
         about: about
       })
     })
-      .then(res => res.ok ? res.json() : Promise.reject(`Ошибка:( ${res.status}`))
+      .then(this._checkResponse)
   }
 
   postCreateCard(name, link) {
@@ -44,7 +46,7 @@ export class Api {
         link: link
       })
     })
-      .then(res => res.ok ? res.json() : Promise.reject(`Ошибка:( ${res.status}`))
+      .then(this._checkResponse)
   }
 
   deleteInitialCards(_id) {
@@ -62,7 +64,7 @@ export class Api {
       method: 'PUT',
       headers: this._headers
     })
-      .then(res => res.ok ? res.json() : Promise.reject(`Ошибка:( ${res.status}`))
+      .then(this._checkResponse)
   }
 
   deleteLike(_id) {
@@ -70,7 +72,7 @@ export class Api {
       method: 'DELETE',
       headers: this._headers
     })
-      .then(res => res.ok ? res.json() : Promise.reject(`Ошибка:( ${res.status}`))
+      .then(this._checkResponse)
   }
 
   updateAvatar(avatar) {
@@ -81,7 +83,7 @@ export class Api {
         avatar: avatar
       })
     })
-      .then(res => res.ok ? res.json() : Promise.reject(`Ошибка:( ${res.status}`))
+      .then(this._checkResponse)
   }
 }
 

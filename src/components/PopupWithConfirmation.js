@@ -20,7 +20,7 @@ export class PopupWithConfirmation extends Popup {
     this._deleteBtn.addEventListener('click', (evt) => {
       evt.preventDefault();
       this._handlePopupFormSubmit(this._id, this._card);
-      super.close();
+      // super.close();
     })
   }
 }

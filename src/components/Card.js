@@ -37,11 +37,10 @@ export class Card {
   }
 
   countLikes(array) {
-    this._cardTemplate.querySelector(".card__like-counter").textContent =
-      array.length;
+    this._cardLikeCounter.textContent = array.length;
   }
 
-  _handleLikeButtonClick() {
+  handleLikeButtonClick() {
     this._buttonLike.classList.toggle("card__heart-button_active");
   }
 
@@ -57,9 +56,7 @@ export class Card {
     this._buttonLike.addEventListener("click", () => {
       if (this._isLiked()) {
         this._handleDeleteLike(this._data.id);
-        this._handleLikeButtonClick();
       } else {
-        this._handleLikeButtonClick();
         this._handlePutLike(this._data.id);
       }
     });
@@ -71,6 +68,9 @@ export class Card {
   generateCard() {
     this._cardTemplate = this._getTemplate();
 
+    this._cardLikeCounter = this._cardTemplate.querySelector(
+      ".card__like-counter"
+    );
     this._cardElementImage = this._cardTemplate.querySelector(".card__image");
     this._cardElementTitle =
       this._cardTemplate.querySelector(".card__subtitle");
@@ -80,6 +80,10 @@ export class Card {
     this._cardElementTitle.textContent = this._data.name;
 
     this._addEventListeners();
+
+    if (this._data.likes.some((like) => like._id === this._userId)) {
+      this.handleLikeButtonClick();
+    }
 
     //Сравнить id мой с id ownera
     if (this._userId !== this._data.owner._id) {
